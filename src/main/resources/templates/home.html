@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeaSpirit! Thé biologique</title>
+    <link rel="stylesheet" th:href="@{/css/style-index.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <main id="page-content">
+        <header th:style="'background-image: url(/images/head-feuille.png)'">
+            <a id="logo-lien" th:href="@{/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
+           <section class="bar-top">
+                <div class="menu-and-search">
+                    <div class="burger">
+                        <button id="btn-burger">
+                            <img th:src="@{/images/menu-burger-64.png}" alt="menu-principal">
+                        </button>
+                        <ul id="list-burger">
+                            <li id="menu-item-thé" class="menu-item">
+                                <button class="btn-menu"><a href="#">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                <div id="item-content-thé" class="item-content">
+                                    <a href="#">Thé Blanc</a>
+                                    <a href="#">Thé Vert</a>
+                                    <a href="#">Thé Jaune</a>
+                                    <a href="#">Thé Noir</a>
+                                    <a href="#">Oolong</a>
+                                    <a href="#">Pu Erh</a>
+                                </div>
+                            </li>
+                            <li class="menu-item"><button class="btn-menu"><a href="#">Coffrets</a></button></li>
+
+                            <li id="menu-item-accesoires" class="menu-item">
+                                <button class="btn-menu"><a href="#">Accesoires</a><i id="fleche-accesoires" class="fa fa-caret-down"></i> </button>
+                                <div id="item-content-accesoires" class="item-content">
+                                    <a href="#">Théières</a>
+                                    <a href="#">Tasses</a>
+                                    <a href="#">Ustensiles</a>
+            
+                                </div>
+                            </li>
+            
+                            <li id="menu-item-guide" class="menu-item">
+                                <button class="btn-menu"><a href="#">Guide du thé</a></button>
+                                <div id="item-content-guide" class="item-content">
+                                </div>
+                            </li>
+                        </ul>      
+                    </div>
+                    <form action="">
+                        <div class="search">
+                            <label for="search"></label>
+                            <input type="text" placeholder="Jasmine, Détox" name="" value="" />
+                            <button id="search-button">
+                                <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="user-cart">
+                    <button id="user">
+                        <img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image">
+                    </button>
+                    <button id="cart">
+                        <img th:src="@{/images/cart-64.png}" alt="cart image">
+                    </button>
+
+                </div>
+            </section>
+            <nav class="menu">
+                <div class="dropdown">
+                    <a href="#">Thés</a>
+                    <div class="dropdown-content">
+                        <a href="#">Thé Blanc</a>
+                        <a href="#">Thé Vert</a>
+                        <a href="#">Thé Jaune</a>
+                        <a href="#">Thé Noir</a>
+                        <a href="#">Oolong</a>
+                        <a href="#">Pu Erh</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#">Coffrets</a>
+                </div>
+                <div class="dropdown">
+                    <a href="#">Accesoires</a>
+                    <div class="dropdown-content">
+                        <a href="#">Théières</a>
+                        <a href="#">Tasses</a>
+                        <a href="#">Ustensiles</a>
+
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#">Guide du thé</a>
+                </div>
+
+            </nav>  
+        </header>
+        <section class="main-image" th:style="'background-image:url(/images/tealand.png)'">
+                <h3 id="pureté">la pureté de la tradition </h3>
+                <h3 id="force">la force de la nature</h3>
+        </section>
+        <section class="presentation">
+            <div>
+                <img id="rond" th:src="@{/images/rond.jpg}" alt="image de thé">
+            </div>
+            <p id="valeur-pc">TeaSpirit achète en direct des thés de qualité auprès de producteurs sur le terrain, entièrement traçables. Chaque année, on va à la rencontre des producteurs, visite leurs plantations, participe à une partie des récoltes et de la fabrication.
+            Une grande majorité de nos thés sont sourcés et importés directement par notre équipe, sans l'intervention d'aucun autre intermédiaire et en toute indépendance.
+            Notre rôle est de créer des relations directes entre les producteurs et les consommateurs. Du producteur à votre tasse, nous voulons redonner au plus grand nombre le plaisir de savourer de bons thés de qualité.</p>
+            <p id="valeur-mobile">TeaSpirit achète directement des thés de qualité, traçables et sans intermédiaires. Chaque année, nous visitons les producteurs et participons aux récoltes, afin d'offrir aux consommateurs des thés d'exception.
+            </p>
+        
+        </section>
+        <section class="notre-selection">
+            <h3>Notre Sélection</h3>
+            <ul class="exemples">
+                <li>
+                    <a href="file:///E:/Front/HTML/Maquette%20TeaSpirit%20-%202/page%20produit.html">
+                    <figure>
+                        <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                        <figcaption>
+                            <h4>Huangya Yellow Tips</h4>
+                            <br>
+                            <h5>Thé Vert NatureVégétal, iodé</h5>
+                            <h5>Pochette vrac 100g</h5>
+                            <h5 class="prix">20€</h5>
+                        </figcaption>
+                    </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+                </li>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                            <figcaption>
+                                <h4>Huangya Yellow Tips</h4>
+                                <br>
+                                <h5>Thé Vert NatureVégétal, iodé</h5>
+                                <h5>Pochette vrac 100g</h5>
+                                <h5 class="prix">20€</h5>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                            <figcaption>
+                                <h4>Huangya Yellow Tips</h4>
+                                <br>
+                                <h5>Thé Vert NatureVégétal, iodé</h5>
+                                <h5>Pochette vrac 100g</h5>
+                                <h5 class="prix">20€</h5>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                            <figcaption>
+                                <h4>Huangya Yellow Tips</h4>
+                                <br>
+                                <h5>Thé Vert NatureVégétal, iodé</h5>
+                                <h5>Pochette vrac 100g</h5>
+                                <h5 class="prix">20€</h5>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                            <figcaption>
+                                <h4>Huangya Yellow Tips</h4>
+                                <br>
+                                <h5>Thé Vert NatureVégétal, iodé</h5>
+                                <h5>Pochette vrac 100g</h5>
+                                <h5 class="prix">20€</h5>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                            <figcaption>
+                                <h4>Huangya Yellow Tips</h4>
+                                <br>
+                                <h5>Thé Vert NatureVégétal, iodé</h5>
+                                <h5>Pochette vrac 100g</h5>
+                                <h5 class="prix">20€</h5>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                            <figcaption>
+                                <h4>Huangya Yellow Tips</h4>
+                                <br>
+                                <h5>Thé Vert NatureVégétal, iodé</h5>
+                                <h5>Pochette vrac 100g</h5>
+                                <h5 class="prix">20€</h5>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+                    
+                </li>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                            <figcaption>
+                                <h4>Huangya Yellow Tips</h4>
+                                <br>
+                                <h5>Thé Vert NatureVégétal, iodé</h5>
+                                <h5>Pochette vrac 100g</h5>
+                                <h5 class="prix">20€</h5>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <button class="add">AJOUTER AU PANIER</button>
+                </li>
+            </ul>
+        </section>
+        <footer>
+            <section class="footer-top">
+                <ul class="footer-icon">
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/livraison.png}" alt="livraison offerte dès 60€ d'achats">
+                            <br>
+                            <figcaption>LIVRAISON OFFERTE <br>DÈS 60€ D'ACHATS</figcaption>
+
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/lock.png}" alt="paiement sécurisé">
+                            <br>
+                            <figcaption>PAIEMENT SÉCURISÉ</figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/box.png}" alt="expédition en 72h">
+                            <br>
+                            <figcaption>EXPÉDITION EN 72H</figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/recycle.png}" alt="emballages recyclés">
+                            <br>
+                            <figcaption>TOUS NOS EMBALLAGES SONT RECYCLABLES</figcaption>
+                        </figure>
+                        
+                    </li>
+                </ul>
+
+            </section>
+            <div id="bar"></div>
+            <section class="footer-bottom" th:style="'background-image:url(/images/fond-footer2.png)'">
+                <ul class="contact">
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Notre Histoire</a></li>
+                    <li><a href="#">Conditions Génarales de Vente</a></li>
+                    <li><a href="#">Mention Légales</a></li>
+                </ul>
+
+            </section>
+
+        </footer>
+    </main>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>  
+</body>
+</html>

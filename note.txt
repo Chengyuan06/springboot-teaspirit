@@ -1,0 +1,34 @@
+?? image 2
+
+
+静态方法 vs 实例方法：静态方法是属于类的，而实例方法是属于对象的。在Java中，不能用一个static方法去隐藏或覆盖父类中的实例方法，因为它们的绑定方式不同（静态方法是编译时绑定，而实例方法是运行时绑定）。
+
+方法签名冲突：当你在子类中声明一个与父类中同名的方法，如果父类中的方法是实例方法，那么子类中声明的static方法会与父类的实例方法形成冲突。这是因为静态方法和实例方法会根据不同的调用方式（通过类或实例）来进行解析，导致编译器无法判断应该调用哪个方法。
+
+解决办法：
+修改子类方法的名称：你可以为子类中的static方法使用不同的名称，以避免与父类的实例方法冲突。
+
+父类方法也声明为static：如果你希望子类中的方法与父类中的方法同名且都是static方法，父类中的方法必须也声明为static。但请注意，这仍然不是“重写”，而是“方法隐藏”。在这种情况下，子类的方法会隐藏父类的static方法，但不会重写它。如果通过子类调用方法，会调用子类的static方法；如果通过父类调用方法，则会调用父类的static方法。
+
+class Parent {
+    static void staticMethod() {
+        System.out.println("Parent's static method");
+    }
+}
+
+class Child extends Parent {
+    static void staticMethod() {
+        System.out.println("Child's static method");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Parent p = new Child();
+        p.staticMethod(); // 调用父类的static方法
+    }
+}
+
+在上面的例子中，p虽然是一个Child对象，但是p.staticMethod()依然会调用Parent的静态方法，因为static方法是根据引用的类型（Parent）在编译时绑定的，而不是根据对象的类型（Child）在运行时绑定的。
+
+因此，static方法不能被子类重写，只能被隐藏，因为它们是与类绑定的，而不是与实例绑定的。
