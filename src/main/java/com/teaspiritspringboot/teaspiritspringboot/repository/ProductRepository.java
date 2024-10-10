@@ -28,9 +28,24 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Modifying //自定义的更新或删除操作时，需要添加 `@Modifying` 注解来告知 Spring Data JPA 这不是一个普通的查询操作，而是一个会修改数据库数据的操作。如果没有这个注解，可能会导致运行时错误或操作无法正常执行。
     @Query("UPDATE Product e SET e.is_deleted = true WHERE e.sku = :sku")
-    void softDeleteById(@Param("sku") int sku); 
-    // //`:sku` 中的冒号是用于标识这是一个参数占位符。
-    // //通过在 `@Query` 注解中的 SQL 语句中使用，并在方法定义中使用 `@Param("sku")` 注解将方法参数与占位符进行绑定，使得在执行查询或更新操作时能够动态地传入具体的值。这种方式增强了代码的灵活性和可复用性。
+    int softDeleteById(@Param("sku") int sku); 
+    // `:sku` 中的冒号是用于标识这是一个参数占位符。
+    /*
+    通过在 `@Query` 注解中的 SQL 语句中使用，并在方法定义中使用 `@Param("sku")` 注解将方法参数与占位符进行绑定
+    使得在执行查询或更新操作时能够动态地传入具体的值。这种方式增强了代码的灵活性和可复用性。
+    */
+    /*
+     *  int softDeleteById(@Param("sku") int sku); il renvoie int pour savoir combien de linge a été modifié dans BDD
+     *  c'est une bonne pratique pour savoir si le request est bien programmé. on peut rester en void 
+     * 通常@Modifying查询返回一个int，表示受影响的行数。
+     */
+
+     @Transactional
+     @Modifying
+     @Query("UPDATE Product p SET p.sku = :newSku, p.name = :newName, p.price = :newPrice, p.quantity = :newQuantity, p.image= :newImage WHERE p.sku = :sku")
+     int updateProuctInfo(@Param("newSku") int newSku, @Param("newName") String newName, @Param("newPrice") double newPrice, @Param("newQuantity") int newQuantity, @Param("newImage") String newImage, @Param("sku") int sku);
+
+
 
     @Query("SELECT p FROM Product p WHERE p.is_deleted = true")
     List<Product> getAllDeleted();

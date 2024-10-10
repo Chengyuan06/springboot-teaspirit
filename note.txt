@@ -1,5 +1,7 @@
 ?? image 2
-
+/uploads/huangya-yellow.jpg
+Huang Ya Yellow Tips
+18
 
 静态方法 vs 实例方法：静态方法是属于类的，而实例方法是属于对象的。在Java中，不能用一个static方法去隐藏或覆盖父类中的实例方法，因为它们的绑定方式不同（静态方法是编译时绑定，而实例方法是运行时绑定）。
 
