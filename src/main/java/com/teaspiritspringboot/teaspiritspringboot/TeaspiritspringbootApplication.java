@@ -8,6 +8,11 @@ public class TeaspiritspringbootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TeaspiritspringbootApplication.class, args);
+		
+
+
+
+
 	}
 
 }
