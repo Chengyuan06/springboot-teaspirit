@@ -6,13 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.teaspiritspringboot.teaspiritspringboot.model.Product;
-// import com.teaspiritspringboot.teaspiritspringboot.model.Product;
 import com.teaspiritspringboot.teaspiritspringboot.model.Tea;
 import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
-// import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
 import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRespository;
 
 import java.util.Optional;

@@ -1,17 +1,5 @@
 package com.teaspiritspringboot.teaspiritspringboot.model;
 
-
-
-import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRespository;
-
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.PreparedStatement;
-// import java.sql.ResultSet;
-// import java.sql.SQLException;
-// import java.sql.Statement;
-// import java.util.ArrayList;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -76,15 +64,6 @@ public class Tea extends Product {
     }
     public Tea(){}
 
-    // public Integer getTeaSku(){
-    //     return teaSku;
-    // }
-
-    // public void setTeaSku(int teaSku){
-    //     this.teaSku = teaSku;
-    // }
-
-    
 
     public String getType() {
         return type;
