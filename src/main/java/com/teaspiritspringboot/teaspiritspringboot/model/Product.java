@@ -16,10 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table; 
-
-import java.util.List;
-
-
 @Entity //@Entity 注解：标记该类为一个 JPA 实体，表明它对应于数据库中的一个表。
 @Inheritance(strategy = InheritanceType.JOINED) 
 // inheritance strategy means each class in the hierarchy will have its table, and they will be joined using foreign keys

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeaSpirit/Tealist</title>
+    <link rel="stylesheet" th:href="@{/css/basic.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/tealist.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <main id="page-content">
+        <header th:style="'background-image: url(/images/head-feuille.png)'">
+            <a id="logo-lien" th:href="@{/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
+           <section class="bar-top">
+                <div class="menu-and-search">
+                    <div class="burger">
+                        <button id="btn-burger">
+                            <img th:src="@{/images/menu-burger-64.png}" alt="menu-principal">
+                        </button>
+                        <ul id="list-burger">
+                            <li id="menu-item-thé" class="menu-item">
+                                <button class="btn-menu"><a href="#">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                <div id="item-content-thé" class="item-content">
+                                    <a href="#">Thé Blanc</a>
+                                    <a href="#">Thé Vert</a>
+                                    <a href="#">Thé Jaune</a>
+                                    <a href="#">Thé Noir</a>
+                                    <a href="#">Oolong</a>
+                                    <a href="#">Pu Erh</a>
+                                </div>
+                            </li>
+                            <li class="menu-item"><button class="btn-menu"><a href="#">Coffrets</a></button></li>
+
+                            <li id="menu-item-accesoires" class="menu-item">
+                                <button class="btn-menu"><a href="#">Accesoires</a><i id="fleche-accesoires" class="fa fa-caret-down"></i> </button>
+                                <div id="item-content-accesoires" class="item-content">
+                                    <a href="#">Théières</a>
+                                    <a href="#">Tasses</a>
+                                    <a href="#">Ustensiles</a>
+            
+                                </div>
+                            </li>
+            
+                            <li id="menu-item-guide" class="menu-item">
+                                <button class="btn-menu"><a href="#">Guide du thé</a></button>
+                                <div id="item-content-guide" class="item-content">
+                                </div>
+                            </li>
+                        </ul>      
+                    </div>
+                    <form action="">
+                        <div class="search">
+                            <label for="search"></label>
+                            <input type="text" placeholder="Jasmine, Détox" name="" value="" />
+                            <button id="search-button">
+                                <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="user-cart">
+                    <button id="user">
+                        <img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image">
+                    </button>
+                    <button id="cart">
+                        <img th:src="@{/images/cart-64.png}" alt="cart image">
+                    </button>
+
+                </div>
+            </section>
+            <nav class="menu">
+                <div class="dropdown">
+                    <a href="#">Thés</a>
+                    <div class="dropdown-content">
+                        <a href="#">Thé Blanc</a>
+                        <a href="#">Thé Vert</a>
+                        <a href="#">Thé Jaune</a>
+                        <a href="#">Thé Noir</a>
+                        <a href="#">Oolong</a>
+                        <a href="#">Pu Erh</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#">Coffrets</a>
+                </div>
+                <div class="dropdown">
+                    <a href="#">Accesoires</a>
+                    <div class="dropdown-content">
+                        <a href="#">Théières</a>
+                        <a href="#">Tasses</a>
+                        <a href="#">Ustensiles</a>
+
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#">Guide du thé</a>
+                </div>
+
+            </nav>  
+        </header>
+        <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">Nos thés 茶</div>
+        <div class="filter-bar">filter bar à venir</div>
+        <section id = "tealist">
+            <div class="product" th:each="tea: ${teas.content}">
+                <!-- th:each : est une boucle de foreach; pour tea: est l'objet récupéré de la liste teas
+                teas fait référence de l'objet Page<teas>, cet objet a plusiuers propriétés utiles pour la pagination, comme content, number, totalPages, etc.
+                teas.content: cette propriété représente la liste de tous les éléments (ici, chaque Tea) de la page actuelle -->
+                <!-- chaque fois que Thymeleaf rencontre cette directive, il va générer un <div> pour 
+                chaque produit de thé contenu dans teas.content, en utilisant la variable tea pour insérer les valeurs spécifiques à ce produit dans le HTML. -->
+                <a href="#">
+                    <figure>
+                        <img class="product-image" th:src="@{${tea.image}}" alt="image de produit">
+                        <figcaption>
+                            <h4 th:text="@{${tea.name}}">Tea Name</h4>
+                            <br>
+                            <p th:text="@{${tea.type}}">Tea Type</p>
+                            <h5>Pochette vrac 50g</h5>
+                            <h5 class="prix" th:text="${tea.price} + '€'"> Tea Price</h5>
+                        </figcaption>
+                    </figure>
+                </a>
+                <button class="add">AJOUTER AU PANIER</button>
+            </div>
+
+        </section>
+        <footer>
+            <section class="footer-top">
+                <ul class="footer-icon">
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/livraison.png}" alt="livraison offerte dès 60€ d'achats">
+                            <br>
+                            <figcaption>LIVRAISON OFFERTE <br>DÈS 60€ D'ACHATS</figcaption>
+
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/lock.png}" alt="paiement sécurisé">
+                            <br>
+                            <figcaption>PAIEMENT SÉCURISÉ</figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/box.png}" alt="expédition en 72h">
+                            <br>
+                            <figcaption>EXPÉDITION EN 72H</figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/recycle.png}" alt="emballages recyclés">
+                            <br>
+                            <figcaption>TOUS NOS EMBALLAGES SONT RECYCLABLES</figcaption>
+                        </figure>
+                        
+                    </li>
+                </ul>
+
+            </section>
+            <div id="bar"></div>
+            <section class="footer-bottom" th:style="'background-image:url(/images/fond-footer2.png)'">
+                <ul class="contact">
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Notre Histoire</a></li>
+                    <li><a href="#">Conditions Génarales de Vente</a></li>
+                    <li><a href="#">Mention Légales</a></li>
+                </ul>
+
+            </section>
+
+        </footer>
+
+    </main>
+    
+</body>
+</html>
