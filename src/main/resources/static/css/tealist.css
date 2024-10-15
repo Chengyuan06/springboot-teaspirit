@@ -95,3 +95,8 @@ figcaption h5{
     height: 2.5rem;
     margin: 10px
 }
+
+.pagination{
+    display: flex;
+    justify-content: center;
+}

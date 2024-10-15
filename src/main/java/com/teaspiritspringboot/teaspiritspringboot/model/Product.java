@@ -22,7 +22,7 @@ import jakarta.persistence.Table;
 @Table( name = "product") // @Table(name = "product") 注解：指定了这个实体类映射的数据库表的名称是 product。
 public class Product {
     @Id
-    private int sku; // @Id est juste l'atonnation pour l'attribut sku. Pour indiquer sku est la clé primaire dans BDD
+    private String sku; // @Id est juste l'atonnation pour l'attribut sku. Pour indiquer sku est la clé primaire dans BDD
     private String name;
     private double price;
     private int quantity;
@@ -42,7 +42,7 @@ public class Product {
 
 
     //constructeurs:
-    public Product(int sku, String name, double price, int quantity, String image){
+    public Product(String sku, String name, double price, int quantity, String image){
         this.sku = sku;
         this.name = name;
         this.price = price;
@@ -63,11 +63,11 @@ public class Product {
                 + image + ", is_deleted=" + is_deleted + "]";
     }
 
-    public int getSku() {
+    public String getSku() {
         return sku;
     }
 
-    public void setSku(int sku) {
+    public void setSku(String sku) {
         this.sku = sku;
     }
 

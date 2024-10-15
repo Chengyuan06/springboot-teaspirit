@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.teaspiritspringboot.teaspiritspringboot.model.Tea;
-import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRespository;
+import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRepository;
 
 @Controller
 public class AdminController {
-    @Autowired private TeaRespository teaRespository;
+    @Autowired private TeaRepository teaRespository;
     
      @PutMapping("update/{sku}") // "Put" est le request d'update pour HTTP
         public ResponseEntity<String> updateTea(@PathVariable int sku, @RequestBody Tea updateTea){

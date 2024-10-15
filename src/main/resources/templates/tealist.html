@@ -25,12 +25,13 @@
                             <li id="menu-item-thé" class="menu-item">
                                 <button class="btn-menu"><a href="#">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
                                 <div id="item-content-thé" class="item-content">
-                                    <a href="#">Thé Blanc</a>
-                                    <a href="#">Thé Vert</a>
-                                    <a href="#">Thé Jaune</a>
-                                    <a href="#">Thé Noir</a>
-                                    <a href="#">Oolong</a>
-                                    <a href="#">Pu Erh</a>
+                                    <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
+                                    <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque tu cliques sur le lien. -->
+                                    <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>
+                                    <a th:href="@{/products/tea/filter(type='thé jaune')}">Thé Jaune</a>
+                                    <a th:href="@{/products/tea/filter(type='thé noir')}">Thé Noir</a>
+                                    <a th:href="@{/products/tea/filter(type='oolong')}">Oolong</a>
+                                    <a th:href="@{/products/tea/filter(type='pu erh')}">Pu Erh</a>
                                 </div>
                             </li>
                             <li class="menu-item"><button class="btn-menu"><a href="#">Coffrets</a></button></li>
@@ -41,7 +42,6 @@
                                     <a href="#">Théières</a>
                                     <a href="#">Tasses</a>
                                     <a href="#">Ustensiles</a>
-            
                                 </div>
                             </li>
             
@@ -77,12 +77,12 @@
                 <div class="dropdown">
                     <a href="#">Thés</a>
                     <div class="dropdown-content">
-                        <a href="#">Thé Blanc</a>
-                        <a href="#">Thé Vert</a>
-                        <a href="#">Thé Jaune</a>
-                        <a href="#">Thé Noir</a>
-                        <a href="#">Oolong</a>
-                        <a href="#">Pu Erh</a>
+                        <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
+                        <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>
+                        <a th:href="@{/products/tea/filter(type='thé jaune')}">Thé Jaune</a>
+                        <a th:href="@{/products/tea/filter(type='thé noir')}">Thé Noir</a>
+                        <a th:href="@{/products/tea/filter(type='oolong')}">Oolong</a>
+                        <a th:href="@{/products/tea/filter(type='pu erh')}">Pu Erh</a>
 
                     </div>
                 </div>
@@ -108,7 +108,7 @@
         <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">Nos thés 茶</div>
         <div class="filter-bar">filter bar à venir</div>
         <section id = "tealist">
-            <div class="product" th:each="tea: ${teas.content}">
+            <div class="product" th:each="product: ${products.content}">
                 <!-- th:each : est une boucle de foreach; pour tea: est l'objet récupéré de la liste teas
                 teas fait référence de l'objet Page<teas>, cet objet a plusiuers propriétés utiles pour la pagination, comme content, number, totalPages, etc.
                 teas.content: cette propriété représente la liste de tous les éléments (ici, chaque Tea) de la page actuelle -->
@@ -116,20 +116,34 @@
                 chaque produit de thé contenu dans teas.content, en utilisant la variable tea pour insérer les valeurs spécifiques à ce produit dans le HTML. -->
                 <a href="#">
                     <figure>
-                        <img class="product-image" th:src="@{${tea.image}}" alt="image de produit">
+                        <img class="product-image" th:src="@{${product.image}}" alt="image de produit">
                         <figcaption>
-                            <h4 th:text="@{${tea.name}}">Tea Name</h4>
+                            <h4 th:text="@{${product.name}}">Product Name</h4>
                             <br>
-                            <p th:text="@{${tea.type}}">Tea Type</p>
+                            <p th:text="@{${product.type}}">Product Type</p>
                             <h5>Pochette vrac 50g</h5>
-                            <h5 class="prix" th:text="${tea.price} + '€'"> Tea Price</h5>
+                            <h5 class="prix" th:text="${product.price} + '€'"> Product Price</h5>
                         </figcaption>
-                    </figure>
+                    </figure> 
                 </a>
                 <button class="add">AJOUTER AU PANIER</button>
             </div>
-
         </section>
+        <div class="pagination">
+            <span th:text="'Page ' + ${products.number + 1} + ' sur ' + ${products.totalPages}"></span>
+            <div>
+                <a th:if="${products.hasPrevious()}" th:href="@{/products/tea/filter(type=${type},page=${teas.number - 1})}">&laquo;</a>
+             <!-- teas.number est une propriété directement accessible de l'objet Page en Spring Data JPA. Le number représente la page actuelle, 
+              d'où sa simplicité d'accès sans méthode intermédiaire. Et c'est pourquoi tu vois teas.number plutôt que teas.getNumber().-->
+             <!-- ${} est une variable de Thymeleaf -->
+                <a th:text="${teas.number + 1}"></a> <!-- Affiche le numéro de la page actuelle -->
+                <a th:if="${teas.hasNext()}" th:href="@{/products/tea/filter(type=${type},page=${teas.number + 1})}">&raquo;</a>
+                <!-- Thymeleaf syntax : Utilise des parenthèses () pour séparer les paramètres, comme (type=${type},page=${teas.number - 1}).
+                 dans URL les paramètres sont séparés par virgule et rangés dans une (), sauf que la virgule est 
+                 devenue automtiquement & dans URL -->
+            </div>
+        </div>
+        <!-- teas.number donne le numéro de page actuel, une méthode de Thymeleaf -->
         <footer>
             <section class="footer-top">
                 <ul class="footer-icon">

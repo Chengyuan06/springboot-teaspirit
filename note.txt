@@ -1,7 +1,4 @@
-?? image 2
-/uploads/huangya-yellow.jpg
-Huang Ya Yellow Tips
-18
+
 
 静态方法 vs 实例方法：静态方法是属于类的，而实例方法是属于对象的。在Java中，不能用一个static方法去隐藏或覆盖父类中的实例方法，因为它们的绑定方式不同（静态方法是编译时绑定，而实例方法是运行时绑定）。
 
@@ -34,3 +31,21 @@ public class Test {
 在上面的例子中，p虽然是一个Child对象，但是p.staticMethod()依然会调用Parent的静态方法，因为static方法是根据引用的类型（Parent）在编译时绑定的，而不是根据对象的类型（Child）在运行时绑定的。
 
 因此，static方法不能被子类重写，只能被隐藏，因为它们是与类绑定的，而不是与实例绑定的。
+
+
+  /* Encodage:
+     * L'encodage (ou codage) est le processus de conversion de données d'un format à un autre, 
+     * souvent pour les rendre compatibles avec un certain contexte ou protocole. 
+     * Dans le contexte des URL, l'encodage consiste à transformer les caractères spéciaux, les espaces 
+     * et autres caractères non autorisés en une forme qui peut être transmise via une URL sans problème.
+     * Décodage: sens l'invers :  %C3%A9 ---> é 
+     * donc j'ai besoins de décodage quand findbyType(); j'ai besoins d'encodage quand je capture teas.type in HTML
+     * 
+     * 
+     * Exemple d'encodage URL
+        Espace :   devient %20
+        Accent aigu : é devient %C3%A9
+        Et commercial : & devient %26
+        Comment encoder et décoder en Java ?
+        En Java, vous pouvez utiliser la classe UriUtils pour encoder et décoder les URL.
+     * 

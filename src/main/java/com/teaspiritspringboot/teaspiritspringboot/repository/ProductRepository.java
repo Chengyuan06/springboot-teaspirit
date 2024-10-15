@@ -21,14 +21,14 @@ import com.teaspiritspringboot.teaspiritspringboot.model.Product;
  * extends JpaRepository<Product, Integer> 意味着 ProductRepository 继承了 JpaRepository 的所有方法，同时可以自定义查询方法。
  */
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, String> {
 
-    Product findProductBySku(int sku); // méthode personalisée (pas héritage de JpaRepository)
+    Product findBySku(String sku);
     
     @Transactional
     @Modifying //自定义的更新或删除操作时，需要添加 `@Modifying` 注解来告知 Spring Data JPA 这不是一个普通的查询操作，而是一个会修改数据库数据的操作。如果没有这个注解，可能会导致运行时错误或操作无法正常执行。
     @Query("UPDATE Product e SET e.is_deleted = true WHERE e.sku = :sku")
-    int softDeleteById(@Param("sku") int sku); 
+    int softDeleteById(@Param("sku") String sku); 
     // `:sku` 中的冒号是用于标识这是一个参数占位符。
     /*
     通过在 `@Query` 注解中的 SQL 语句中使用，并在方法定义中使用 `@Param("sku")` 注解将方法参数与占位符进行绑定
@@ -43,7 +43,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
      @Transactional
      @Modifying
      @Query("UPDATE Product p SET p.sku = :newSku, p.name = :newName, p.price = :newPrice, p.quantity = :newQuantity, p.image= :newImage WHERE p.sku = :sku")
-     int updateProuctInfo(@Param("newSku") int newSku, @Param("newName") String newName, @Param("newPrice") double newPrice, @Param("newQuantity") int newQuantity, @Param("newImage") String newImage, @Param("sku") int sku);
+     int updateProuctInfo(@Param("newSku") String newSku, @Param("newName") String newName, @Param("newPrice") double newPrice, @Param("newQuantity") int newQuantity, @Param("newImage") String newImage, @Param("sku") String sku);
 
 
 
