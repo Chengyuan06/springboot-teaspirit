@@ -114,7 +114,7 @@
                 teas.content: cette propriété représente la liste de tous les éléments (ici, chaque Tea) de la page actuelle -->
                 <!-- chaque fois que Thymeleaf rencontre cette directive, il va générer un <div> pour 
                 chaque produit de thé contenu dans teas.content, en utilisant la variable tea pour insérer les valeurs spécifiques à ce produit dans le HTML. -->
-                <a href="#">
+                <a th:href="@{/products/bysku(sku=${product.sku})}">
                     <figure>
                         <img class="product-image" th:src="@{${product.image}}" alt="image de produit">
                         <figcaption>
@@ -132,12 +132,12 @@
         <div class="pagination">
             <span th:text="'Page ' + ${products.number + 1} + ' sur ' + ${products.totalPages}"></span>
             <div>
-                <a th:if="${products.hasPrevious()}" th:href="@{/products/tea/filter(type=${type},page=${teas.number - 1})}">&laquo;</a>
+                <a th:if="${products.hasPrevious()}" th:href="@{/products/tea/filter(type=${type},page=${products.number - 1})}">&laquo;</a>
              <!-- teas.number est une propriété directement accessible de l'objet Page en Spring Data JPA. Le number représente la page actuelle, 
               d'où sa simplicité d'accès sans méthode intermédiaire. Et c'est pourquoi tu vois teas.number plutôt que teas.getNumber().-->
              <!-- ${} est une variable de Thymeleaf -->
-                <a th:text="${teas.number + 1}"></a> <!-- Affiche le numéro de la page actuelle -->
-                <a th:if="${teas.hasNext()}" th:href="@{/products/tea/filter(type=${type},page=${teas.number + 1})}">&raquo;</a>
+                <a th:text="${products.number + 1}"></a> <!-- Affiche le numéro de la page actuelle -->
+                <a th:if="${products.hasNext()}" th:href="@{/products/tea/filter(type=${type},page=${products.number + 1})}">&raquo;</a>
                 <!-- Thymeleaf syntax : Utilise des parenthèses () pour séparer les paramètres, comme (type=${type},page=${teas.number - 1}).
                  dans URL les paramètres sont séparés par virgule et rangés dans une (), sauf que la virgule est 
                  devenue automtiquement & dans URL -->

@@ -21,7 +21,7 @@ public class AdminController {
     @Autowired private TeaRepository teaRespository;
     
      @PutMapping("update/{sku}") // "Put" est le request d'update pour HTTP
-        public ResponseEntity<String> updateTea(@PathVariable int sku, @RequestBody Tea updateTea){
+        public ResponseEntity<String> updateTea(@PathVariable String sku, @RequestBody Tea updateTea){
             Optional<Tea> existingTea = teaRespository.findById(sku);
             if(existingTea.isPresent()){
                 Tea tea = existingTea.get();

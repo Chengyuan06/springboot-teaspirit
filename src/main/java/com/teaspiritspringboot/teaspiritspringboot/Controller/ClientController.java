@@ -1,7 +1,6 @@
 package com.teaspiritspringboot.teaspiritspringboot.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,14 +29,10 @@ public class ClientController {
   
 //   @Autowired private TeaRespository teaRespository;
 
- @Autowired private ProductRepository productRepository;
-  @GetMapping("/bysku") // {sku} est une variable de chemin (path variable), ce qui signifie qu'une partie de l'URL (par exemple /tea/123) sera extraite et utilisée comme paramètre dans la méthode.
-
-  //@PathVariable("sku") : Cela signifie que la valeur de {sku} dans l'URL (par exemple, 123 dans /tea/123) sera capturée et attribuée à la variable int sku.
-  //@PathVariable("sku") signifie que l'URL contiendra une variable appelée sku, comme dans /tea/{sku}.
-  // La valeur à cet emplacement dans l'URL (par exemple 123) est attribuée à la variable sku dans la méthode.
-  public String getProduct(@RequestParam(required = false) String sku, Model model) {
-      if (sku != null && !sku.isEmpty()) {
+  @Autowired private ProductRepository productRepository;
+  @GetMapping("/bysku") 
+  public String getProduct(@RequestParam String sku, Model model) {
+      if (sku != null) {
           Product product = productRepository.findBySku(sku);
           if (product != null) {
               model.addAttribute("product", product);
@@ -48,7 +43,10 @@ public class ClientController {
       return "error"; // ou une autre vue
   }
    
-      // 获取产品详情
+    
+        //@PathVariable("sku") : Cela signifie que la valeur de {sku} dans l'URL (par exemple, 123 dans /tea/123) sera capturée et attribuée à la variable int sku.
+        //@PathVariable("sku") signifie que l'URL contiendra une variable appelée sku, comme dans /tea/{sku}.
+        // La valeur à cet emplacement dans l'URL (par exemple 123) est attribuée à la variable sku dans la méthode.
        
         // L'objet Model est utilisé pour passer des attributs (données) depuis le contrôleur vers la vue (page HTML générée). Il te permet d'ajouter des données à la requête pour qu'elles soient accessibles dans la page Thymeleaf.
         // Cette ligne ajoute l'objet tea au modèle. Le modèle est un conteneur de données qui sera utilisé dans la vue (page Thymeleaf) pour afficher les informations du produit.
@@ -81,10 +79,10 @@ public class ClientController {
         }
 
     @Autowired private TeaRepository teaRepository;
-    @GetMapping("/alltea")
+    @GetMapping("/all")
         public String geAllProducts(Model model, Pageable pageable){
-            Page<Tea> teas = teaRepository.findAll(pageable);
-            model.addAttribute("teas", teas); // dans HTML, chaque fois quand il y a 'teas' dans th:, il passe l'objet teas
+            Page<Product> products = productRepository.findAll(pageable);
+            model.addAttribute("products", products); // dans HTML, chaque fois quand il y a 'teas' dans th:, il passe l'objet teas
             return "tealist";
         }
 
@@ -100,7 +98,7 @@ public class ClientController {
     @GetMapping("/tea/filter")
     public String getTheVert(@RequestParam String type, Model model, Pageable pageable) {
         Page<Tea> teas = teaRepository.findByType(type, pageable);
-        model.addAttribute("teas", teas);
+        model.addAttribute("products", teas);
         model.addAttribute("type", type);
         return "tealist";
     }

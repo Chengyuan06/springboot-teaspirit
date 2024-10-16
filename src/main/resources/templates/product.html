@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produit - [[${tea.name}]]</title>
+    <title>Produit - [[${product.name}]]</title>
     <link rel="stylesheet" th:href="@{/css/basic.css}" />
     <link rel="stylesheet" th:href="@{/css/header.css}" />
     <link rel="stylesheet" th:href="@{/css/style-page-produit.css}" />
@@ -109,7 +109,7 @@
             <div class="product-content">
                 <div class="slideshow-container">
                   <div class="mySlides fade">
-                    <img th:src="@{${tea.image}}" alt="image de produit">
+                    <img th:src="@{${product.image}}" alt="image de produit">
                   </div>
                   <div class="mySlides fade">
                     <img th:src="@{/uploads/pochette.png}" alt="image de d'emballage">
@@ -125,19 +125,19 @@
             </div>
               
             <div class="info">
-                <h1 th:text="${tea.name}">Product name</h1>
-                <p th:text="'Référence: '+${tea.sku}">Product Sku</p> <br>
-                <h2 th:utext="'Profil aromatique: ' + ${tea.profil}">Profil</h2>
-                <h2 th:text="'Type: '+ ${tea.type}">type</h2>
+                <h1 th:text="${product.name}">Product name</h1>
+                <p th:text="'Référence: '+${product.sku}">Product Sku</p> <br>
+                <h2 th:utext="'Profil aromatique: ' + ${product.profil}">Profil</h2>
+                <h2 th:text="'Type: '+ ${product.type}">type</h2>
                 <br>
                 <ul class="features"><h2>Caractéristiques:</h2>
-                    <li th:text="'Origine: ' + ${tea.origin}">Origin</li>
+                    <li th:text="'Origine: ' + ${product.origin}">Origin</li>
                     <li>Culture biologique: label bio de l'UE</li>
-                    <li th:text="'Standard de cueillette: '+ ${tea.picking}">Picking</li>
-                    <li th:text="'Période de récole: '+ ${tea.period}">Period</li>
+                    <li th:text="'Standard de cueillette: '+ ${product.picking}">Picking</li>
+                    <li th:text="'Période de récole: '+ ${product.period}">Period</li>
                 </ul>
                 <div class="price-quantity">
-                    <h2 class="price" th:text="${tea.price} + '€'">Price</h2>
+                    <h2 class="price" th:text="${product.price} + '€'">Price</h2>
                     <button class="50g">
                         <figure class="pochette">
                             <img th:src="@{/images/sachet.jpg}" alt="pochette de 100g">
@@ -156,15 +156,15 @@
                 <ul class="preparation">
                     <li id="temperature">
                         <img th:src="@{/images/temperature.png}" alt="temperature">
-                        <span th:text="${tea.temperature}">Temperature</span>
+                        <span th:text="${product.temperature}">Temperature</span>
                     </li>
                     <li id="time">
                         <img th:src="@{/images/time.png}" alt="temps de Préparation">
-                        <span th:text="${tea.timing}">Timing</span>
+                        <span th:text="${product.timing}">Timing</span>
                     </li>
                     <li id="dose">
                         <img th:src="@{/images/dose.png}" alt="image dose">
-                        <span th:text="${tea.dose}">Dose</span>
+                        <span th:text="${product.dose}">Dose</span>
                     </li>
                 </ul>
             </div>
@@ -172,17 +172,17 @@
         <section class="under-product">
             <div class="pairing">
                 <h2>Pairing et Aliments</h2>
-                <p th:text="${tea.pairing}">Pairing content</p>
+                <p th:text="${product.pairing}">Pairing content</p>
             </div>
             <br><br>
             <div class="bienfatis">
                 <h2>Bienfaits</h2>
-                <p th:utext="${tea.benefits}">Benefits content</p>
+                <p th:utext="${product.benefits}">Benefits content</p>
             </div>
             <br><br>
             <div class="plus">
                 <h2>A savoir plus...</h2>
-                <p th:text="${tea.plus}"></p>
+                <p th:text="${product.plus}"></p>
             </div>
         </section>
         <footer>
