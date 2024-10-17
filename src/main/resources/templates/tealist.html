@@ -14,7 +14,7 @@
 <body>
     <main id="page-content">
         <header th:style="'background-image: url(/images/head-feuille.png)'">
-            <a id="logo-lien" th:href="@{/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
+            <a id="logo-lien" th:href="@{/products/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
            <section class="bar-top">
                 <div class="menu-and-search">
                     <div class="burger">
@@ -23,7 +23,7 @@
                         </button>
                         <ul id="list-burger">
                             <li id="menu-item-thé" class="menu-item">
-                                <button class="btn-menu"><a href="#">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                <button class="btn-menu"><a th:href="@{/products/alltea}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
                                 <div id="item-content-thé" class="item-content">
                                     <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
                                     <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque tu cliques sur le lien. -->
@@ -52,11 +52,11 @@
                             </li>
                         </ul>      
                     </div>
-                    <form action="">
+                    <form th:action="@{/products/search}" th:method="post" role="search">
                         <div class="search">
-                            <label for="search"></label>
-                            <input type="text" placeholder="Jasmine, Détox" name="" value="" />
-                            <button id="search-button">
+                            <label for="search"> <input type="text" placeholder="Jasmine" name="query" /></label>
+                           
+                            <button id="search-button" type="submit">
                                 <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
                             </button>
                         </div>
@@ -75,7 +75,7 @@
             </section>
             <nav class="menu">
                 <div class="dropdown">
-                    <a href="#">Thés</a>
+                    <a th:href="@{/products/alltea}">Thés</a>
                     <div class="dropdown-content">
                         <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
                         <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>

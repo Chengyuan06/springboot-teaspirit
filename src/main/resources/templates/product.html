@@ -13,7 +13,7 @@
 <body>
     <main id="page-content">
         <header th:style="'background-image: url(/images/head-feuille.png)'">
-            <a id="logo-lien" th:href="@{/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
+            <a id="logo-lien" th:href="@{/products/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
                 <section class="bar-top">
                     <div class="menu-and-search">
                         <div class="burger">
@@ -51,11 +51,10 @@
                                 </li>
                             </ul>      
                         </div>
-                        <form action="">
+                        <form th:action="@{/products/search}" th:method="post" role="search">
                             <div class="search">
-                                <label for="search"></label>
-                                <input type="text" placeholder="Jasmine, Détox" name="" value="" />
-                                <button id="search-button">
+                                <label for="search"><input type="search" placeholder="Jasmine" name="query"/></label>
+                                <button id="search-button" type="submit">
                                     <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
                                 </button>
                             </div>
@@ -75,7 +74,7 @@
                 </section>
             <nav class="menu">
                 <div class="dropdown">
-                    <a href="#">Thés</a>
+                    <a th:href="@{/products/alltea}">Thés</a>
                     <div class="dropdown-content">
                         <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
                         <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>
@@ -105,86 +104,86 @@
 
             </nav>  
         </header>
-        <section class="product">
-            <div class="product-content">
-                <div class="slideshow-container">
-                  <div class="mySlides fade">
-                    <img th:src="@{${product.image}}" alt="image de produit">
-                  </div>
-                  <div class="mySlides fade">
-                    <img th:src="@{/uploads/pochette.png}" alt="image de d'emballage">
-                  </div>
-                  <a class="prev" onclick="plusSlides(-1)">❮</a>
-                  <a class="next" onclick="plusSlides(1)">❯</a>
+            <section class="product" >
+                <div class="product-content" >
+                    <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <img th:src="@{${product.image}}" alt="image de produit">
+                    </div>
+                    <div class="mySlides fade">
+                        <img th:src="@{/uploads/pochette.png}" alt="image de d'emballage">
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1)">❮</a>
+                    <a class="next" onclick="plusSlides(1)">❯</a>
+                    </div>
+                    <br>
+                    <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span> 
+                    <span class="dot" onclick="currentSlide(2)"></span> 
+                    </div>
                 </div>
-                <br>
-                <div style="text-align:center">
-                  <span class="dot" onclick="currentSlide(1)"></span> 
-                  <span class="dot" onclick="currentSlide(2)"></span> 
+                
+                <div class="info">
+                    <h1 th:text="${product.name}">Product name</h1>
+                    <p th:text="'Référence: '+${product.sku}">Product Sku</p> <br>
+                    <h2 th:utext="'Profil aromatique: ' + ${product.profil}">Profil</h2>
+                    <h2 th:text="'Type: '+ ${product.type}">type</h2>
+                    <br>
+                    <ul class="features"><h2>Caractéristiques:</h2>
+                        <li th:text="'Origine: ' + ${product.origin}">Origin</li>
+                        <li>Culture biologique: label bio de l'UE</li>
+                        <li th:text="'Standard de cueillette: '+ ${product.picking}">Picking</li>
+                        <li th:text="'Période de récole: '+ ${product.period}">Period</li>
+                    </ul>
+                    <div class="price-quantity">
+                        <h2 class="price" th:text="${product.price} + '€'">Price</h2>
+                        <button class="50g">
+                            <figure class="pochette">
+                                <img th:src="@{/images/sachet.jpg}" alt="pochette de 100g">
+                                <figcaption>Pochette <br> vrac 50g</figcaption>
+                            </figure>
+                        </button>
+                    </div>
+                    <div class="add-cart">
+                        <input type="text" placeholder="+1" id="quantity">
+                        <label for="quantity"></label>
+                        <button class="add">AJOUTER AU PANIER</button>
+                    </div>  
                 </div>
-            </div>
-              
-            <div class="info">
-                <h1 th:text="${product.name}">Product name</h1>
-                <p th:text="'Référence: '+${product.sku}">Product Sku</p> <br>
-                <h2 th:utext="'Profil aromatique: ' + ${product.profil}">Profil</h2>
-                <h2 th:text="'Type: '+ ${product.type}">type</h2>
-                <br>
-                <ul class="features"><h2>Caractéristiques:</h2>
-                    <li th:text="'Origine: ' + ${product.origin}">Origin</li>
-                    <li>Culture biologique: label bio de l'UE</li>
-                    <li th:text="'Standard de cueillette: '+ ${product.picking}">Picking</li>
-                    <li th:text="'Période de récole: '+ ${product.period}">Period</li>
-                </ul>
-                <div class="price-quantity">
-                    <h2 class="price" th:text="${product.price} + '€'">Price</h2>
-                    <button class="50g">
-                        <figure class="pochette">
-                            <img th:src="@{/images/sachet.jpg}" alt="pochette de 100g">
-                            <figcaption>Pochette <br> vrac 50g</figcaption>
-                        </figure>
-                    </button>
+                <div class="advise">
+                    <h2> Conseilles de Préparation</h2>
+                    <ul class="preparation">
+                        <li id="temperature">
+                            <img th:src="@{/images/temperature.png}" alt="temperature">
+                            <span th:text="${product.temperature}">Temperature</span>
+                        </li>
+                        <li id="time">
+                            <img th:src="@{/images/time.png}" alt="temps de Préparation">
+                            <span th:text="${product.timing}">Timing</span>
+                        </li>
+                        <li id="dose">
+                            <img th:src="@{/images/dose.png}" alt="image dose">
+                            <span th:text="${product.dose}">Dose</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="add-cart">
-                    <input type="text" placeholder="+1" id="quantity">
-                    <label for="quantity"></label>
-                    <button class="add">AJOUTER AU PANIER</button>
-                </div>  
-            </div>
-            <div class="advise">
-                <h2> Conseilles de Préparation</h2>
-                <ul class="preparation">
-                    <li id="temperature">
-                        <img th:src="@{/images/temperature.png}" alt="temperature">
-                        <span th:text="${product.temperature}">Temperature</span>
-                    </li>
-                    <li id="time">
-                        <img th:src="@{/images/time.png}" alt="temps de Préparation">
-                        <span th:text="${product.timing}">Timing</span>
-                    </li>
-                    <li id="dose">
-                        <img th:src="@{/images/dose.png}" alt="image dose">
-                        <span th:text="${product.dose}">Dose</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <section class="under-product">
-            <div class="pairing">
-                <h2>Pairing et Aliments</h2>
-                <p th:text="${product.pairing}">Pairing content</p>
-            </div>
-            <br><br>
-            <div class="bienfatis">
-                <h2>Bienfaits</h2>
-                <p th:utext="${product.benefits}">Benefits content</p>
-            </div>
-            <br><br>
-            <div class="plus">
-                <h2>A savoir plus...</h2>
-                <p th:text="${product.plus}"></p>
-            </div>
-        </section>
+            </section>
+            <section class="under-product">
+                <div class="pairing">
+                    <h2>Pairing et Aliments</h2>
+                    <p th:text="${product.pairing}">Pairing content</p>
+                </div>
+                <br><br>
+                <div class="bienfatis">
+                    <h2>Bienfaits</h2>
+                    <p th:utext="${product.benefits}">Benefits content</p>
+                </div>
+                <br><br>
+                <div class="plus">
+                    <h2>A savoir plus...</h2>
+                    <p th:text="${product.plus}"></p>
+                </div>
+            </section>
         <footer>
             <section class="footer-top">
                 <ul class="footer-icon">

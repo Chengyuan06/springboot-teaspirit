@@ -13,7 +13,7 @@
 <body>
     <main id="page-content">
         <header th:style="'background-image: url(/images/head-feuille.png)'">
-            <a id="logo-lien" th:href="@{/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
+            <a id="logo-lien" th:href="@{/products/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
            <section class="bar-top">
                 <div class="menu-and-search">
                     <div class="burger">
@@ -22,7 +22,7 @@
                         </button>
                         <ul id="list-burger">
                             <li id="menu-item-thé" class="menu-item">
-                                <button class="btn-menu"><a href="#">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                <button class="btn-menu"><a th:href="@{/products/alltea}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
                                 <div id="item-content-thé" class="item-content">
                                     <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
                                     <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>
@@ -51,11 +51,18 @@
                             </li>
                         </ul>      
                     </div>
-                    <form action="">
+                    <form role="search" th:action="@{/products/search}" th:method="post">
+                        <!-- role="search" permet aux lecteurs d'écran d'indiquer le formulaire comme étant un formulaire de recherche.
+                        WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) est une spécification écrite par le W3C, 
+                        qui définit un ensemble d'attributs HTML supplémentaires, qui peuvent être appliqués 
+                        aux éléments afin de fournir une sémantique complémentaire et d'améliorer l'accessibilité où elle fait défaut. -->
+    
                         <div class="search">
-                            <label for="search"></label>
-                            <input type="text" placeholder="Jasmine, Détox" name="" value="" />
-                            <button id="search-button">
+                            <label for="search"> <input type="search" placeholder="Jasmine" name="query"/></label>
+                            <!-- The name attribute is used to reference elements in a JavaScript, or to reference form data after a form is submitted.
+
+Note: Only form elements with a name attribute will have their values passed when submitting a form. -->
+                            <button id="search-button" type="submit">
                                 <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
                             </button>
                         </div>
@@ -74,7 +81,7 @@
             </section>
             <nav class="menu">
                 <div class="dropdown">
-                    <a href="#">Thés</a>
+                    <a th:href="@{/products/alltea}">Thés</a>
                     <div class="dropdown-content">
                         <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
                         <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>

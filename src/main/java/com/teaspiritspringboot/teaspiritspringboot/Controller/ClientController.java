@@ -1,6 +1,7 @@
 package com.teaspiritspringboot.teaspiritspringboot.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -9,10 +10,13 @@ import com.teaspiritspringboot.teaspiritspringboot.model.Tea;
 import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
 import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRepository;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,11 +31,11 @@ public class ClientController {
   
   
   
-//   @Autowired private TeaRespository teaRespository;
+
 
   @Autowired private ProductRepository productRepository;
   @GetMapping("/bysku") 
-  public String getProduct(@RequestParam String sku, Model model) {
+  public String getProduct(@RequestParam String sku, Model model, Pageable pageable) {
       if (sku != null) {
           Product product = productRepository.findBySku(sku);
           if (product != null) {
@@ -43,6 +47,50 @@ public class ClientController {
       return "error"; // ou une autre vue
   }
    
+  Page<Product> ConvertProductToPage(Product product, Pageable pageable){
+    List<Product> productList;
+    if (product == null) {
+        productList = Collections.emptyList();
+    } else {
+        productList = List.of(product);
+    }
+  // Retourner une instance de PageImpl avec la liste de produits, le pageable, et la taille de la liste
+    return new PageImpl<>(productList, pageable,productList.size());
+
+
+}
+
+  @PostMapping("/search")
+  public String searchProduct(@RequestParam String query, Model model, Pageable pageable){
+    if (query.matches("^[A-Za-z]\\d{4}$")) {   //regular expression
+        System.out.println(query);// Vérifie si c'est un SKU
+        Product product = productRepository.findBySku(query);
+        if (product != null) {
+            model.addAttribute("products", ConvertProductToPage(product,pageable));
+            return "tealist";
+        }
+    }else{
+        Page<Product> products = productRepository.findByNameContains(query,pageable);
+        if(products != null){
+            model.addAttribute("products", products);
+            return "tealist";
+
+        }
+    
+    }
+    return "error";
+  }
+  /* Regular expression: regex
+   * ^ : Indique le début de la chaîne. Cela signifie que l'expression doit commencer dès le début de la chaîne.
+   *[A-Za-z] : Correspond à une seule lettre, majuscule ou minuscule.A-Z : Toutes les lettres majuscules. a-z : Toutes les lettres minuscules.
+   * \\d{4} : Correspond exactement à quatre chiffres. \\d : Correspond à un chiffre (0-9).
+   * {4} : Indique que la séquence doit se répéter exactement quatre fois.
+   * $ : Indique la fin de la chaîne. Cela signifie que l'expression doit se terminer ici.
+   * 
+   */
+
+ 
+
     
         //@PathVariable("sku") : Cela signifie que la valeur de {sku} dans l'URL (par exemple, 123 dans /tea/123) sera capturée et attribuée à la variable int sku.
         //@PathVariable("sku") signifie que l'URL contiendra une variable appelée sku, comme dans /tea/{sku}.
@@ -79,7 +127,7 @@ public class ClientController {
         }
 
     @Autowired private TeaRepository teaRepository;
-    @GetMapping("/all")
+    @GetMapping("/alltea")
         public String geAllProducts(Model model, Pageable pageable){
             Page<Product> products = productRepository.findAll(pageable);
             model.addAttribute("products", products); // dans HTML, chaque fois quand il y a 'teas' dans th:, il passe l'objet teas

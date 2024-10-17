@@ -2,6 +2,8 @@ package com.teaspiritspringboot.teaspiritspringboot.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,10 +25,12 @@ import com.teaspiritspringboot.teaspiritspringboot.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
 
-    Product findBySku(String sku); 
+    Product findBySku(String sku);
+    Page<Product> findByNameContains(String name,Pageable pageable);
     // une méthode fournie par JPA est findById() qui retrouve une donnée par la clé primaire, cette méthode renvoie un résulat de <Optional>
     //donc je veux une méthode qui est nommé à une autre façon pas comme findById() et qui retrouve une donnée par la clé primaire, 
     // il me faut que je crée cette méthode dans repository, mais je n'ai pas besoins coder les requests 
+
     
     @Transactional
     @Modifying //自定义的更新或删除操作时，需要添加 `@Modifying` 注解来告知 Spring Data JPA 这不是一个普通的查询操作，而是一个会修改数据库数据的操作。如果没有这个注解，可能会导致运行时错误或操作无法正常执行。
