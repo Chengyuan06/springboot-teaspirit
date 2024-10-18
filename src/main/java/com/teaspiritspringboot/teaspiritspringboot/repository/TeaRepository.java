@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 @Repository
 public interface TeaRepository extends JpaRepository<Tea,String>{
   
-    Page<Tea> findByNameContains(String name, Pageable pageable);
+    // Page<Tea> findByNameContains(String name, Pageable pageable);
     Page<Tea> findByType(String type, Pageable pageable);
     
 

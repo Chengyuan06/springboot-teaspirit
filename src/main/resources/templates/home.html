@@ -129,140 +129,27 @@ Note: Only form elements with a name attribute will have their values passed whe
         <section class="notre-selection">
             <h3>Notre Sélection</h3>
             <ul class="exemples">
-                <li>
-                    <a href="file:///E:/Front/HTML/Maquette%20TeaSpirit%20-%202/page%20produit.html">
+                <li class="selection" th:each="selection: ${selections}">
+                    <a th:href="@{/products/bysku(sku=${selection.sku})}">
                     <figure>
-                        <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
+                        <img th:src="${selection.image}" alt="image de thé">
                         <figcaption>
-                            <h4>Huangya Yellow Tips</h4>
-                            <br>
-                            <h5>Thé Vert NatureVégétal, iodé</h5>
+                            <h4 th:text="${selection.name}">Notre Sélection</h4>
+                            <h5 th:text="${selection.profil}">Profil aromatique de thé</h5>
                             <h5>Pochette vrac 100g</h5>
-                            <h5 class="prix">20€</h5>
+                            <h5 class="prix" th:text="${selection.price} + '€'">Prix de produit</h5>
                         </figcaption>
                     </figure>
                     </a>
                     <button class="add">AJOUTER AU PANIER</button>
-                </li>
-                <li>
-                    <a href="#">
-                        <figure>
-                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
-                            <figcaption>
-                                <h4>Huangya Yellow Tips</h4>
-                                <br>
-                                <h5>Thé Vert NatureVégétal, iodé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix">20€</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <button class="add">AJOUTER AU PANIER</button>
-
-                </li>
-                <li>
-                    <a href="#">
-                        <figure>
-                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
-                            <figcaption>
-                                <h4>Huangya Yellow Tips</h4>
-                                <br>
-                                <h5>Thé Vert NatureVégétal, iodé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix">20€</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <button class="add">AJOUTER AU PANIER</button>
-
-                </li>
-                <li>
-                    <a href="#">
-                        <figure>
-                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
-                            <figcaption>
-                                <h4>Huangya Yellow Tips</h4>
-                                <br>
-                                <h5>Thé Vert NatureVégétal, iodé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix">20€</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <button class="add">AJOUTER AU PANIER</button>
-
-                </li>
-                <li>
-                    <a href="#">
-                        <figure>
-                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
-                            <figcaption>
-                                <h4>Huangya Yellow Tips</h4>
-                                <br>
-                                <h5>Thé Vert NatureVégétal, iodé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix">20€</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <button class="add">AJOUTER AU PANIER</button>
-
-                </li>
-                <li>
-                    <a href="#">
-                        <figure>
-                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
-                            <figcaption>
-                                <h4>Huangya Yellow Tips</h4>
-                                <br>
-                                <h5>Thé Vert NatureVégétal, iodé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix">20€</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <button class="add">AJOUTER AU PANIER</button>
-
-                </li>
-                <li>
-                    <a href="#">
-                        <figure>
-                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
-                            <figcaption>
-                                <h4>Huangya Yellow Tips</h4>
-                                <br>
-                                <h5>Thé Vert NatureVégétal, iodé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix">20€</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <button class="add">AJOUTER AU PANIER</button>
-                    
-                </li>
-                <li>
-                    <a href="#">
-                        <figure>
-                            <img th:src="@{/uploads/huangya-yellow.jpg}" alt="image thé Huangya Yellow">
-                            <figcaption>
-                                <h4>Huangya Yellow Tips</h4>
-                                <br>
-                                <h5>Thé Vert NatureVégétal, iodé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix">20€</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <button class="add">AJOUTER AU PANIER</button>
-                </li>
+                </li> 
             </ul>
-        </section>
         <footer>
             <section class="footer-top">
-                <ul class="footer-icon">
+                 <ul class="footer-icon">
                     <li>
                         <figure>
-                            <img th:src="@{/images/livraison.png}" alt="livraison offerte dès 60€ d'achats">
+                            <img th:src="@{/images/livraison.png}"  alt="livraison offerte dès 60€ d'achats">
                             <br>
                             <figcaption>LIVRAISON OFFERTE <br>DÈS 60€ D'ACHATS</figcaption>
 
@@ -286,12 +173,11 @@ Note: Only form elements with a name attribute will have their values passed whe
                         <figure>
                             <img th:src="@{/images/recycle.png}" alt="emballages recyclés">
                             <br>
-                            <figcaption>TOUS NOS EMBALLAGES SONT RECYCLABLES</figcaption>
+                            <figcaption>TOUS NOS EMBALLAGES<br>SONT RECYCLABLES</figcaption>
                         </figure>
                         
                     </li>
                 </ul>
-
             </section>
             <div id="bar"></div>
             <section class="footer-bottom" th:style="'background-image:url(/images/fond-footer2.png)'">

@@ -1,16 +1,4 @@
 package com.teaspiritspringboot.teaspiritspringboot.model;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
-
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.PreparedStatement;
-// import java.sql.ResultSet;
-// import java.sql.SQLException;
-// import java.sql.Statement;
-// import java.util.ArrayList;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
@@ -34,11 +22,7 @@ public class Product {
      * ID 字段通常是一个表的主键。@GeneratedValue 注解用于指定主键生成策略，这里使用了 IDENTITY 策略，表示数据库自动生成主键值。
      */
 
-    @Autowired static ProductRepository productRespository;
-
-    // public static List<Product> getAllDeleted(){
-    //     return productRespository.getAllDeleted();
-    // }
+    
 
 
     //constructeurs:

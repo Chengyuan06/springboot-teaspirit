@@ -48,10 +48,7 @@ ul{
     flex-wrap: wrap;
     align-items: center;
 }
-li{
-    list-style-type: none;
-  
-} 
+
 
     
 .exemples{
@@ -67,20 +64,25 @@ li{
     padding: 3rem 0;
 
 }
-
-.exemples a:hover{
-    text-decoration: none;
-}
-
-
-.exemples li{
+.selection{
     width: 25%;
     margin-bottom: 6.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.3s;
 
 }
+
+.selection:hover{
+    transform: scale(1.1);
+   
+}
+.selection a:hover{
+    text-decoration: none;
+}
+
+
 
 
 figure{

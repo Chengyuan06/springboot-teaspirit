@@ -6,13 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teaspiritspringboot.teaspiritspringboot.model.Product;
+import com.teaspiritspringboot.teaspiritspringboot.model.Selection;
 import com.teaspiritspringboot.teaspiritspringboot.model.Tea;
 import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
+import com.teaspiritspringboot.teaspiritspringboot.repository.SelectionRepository;
 import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRepository;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -103,9 +105,18 @@ public class ClientController {
     // Pourquoi les guillemets ? : Les guillemets sont nécessaires ici pour indiquer que "tea" est une chaîne de caractères, et cette chaîne sera le nom de l'attribut sous lequel tu veux enregistrer l'objet tea.
     // Modèle et Vue : Cet attribut sera ensuite utilisé dans le modèle pour être accessible dans la vue (le fichier Thymeleaf). Par exemple, dans ton fichier HTML, tu pourras accéder à cet objet tea en utilisant la syntaxe ${tea} dans Thymeleaf
 
-
+    @Autowired SelectionRepository selectionRepository;
     @GetMapping("/teaspirit")
-        public String getHomePage(){
+        public String getHomePage(Model model){
+
+            List<Selection> selections = selectionRepository.findAll();
+            if (selections != null) {
+                model.addAttribute("selections", selections);
+                return "home";
+                
+            }
+            return "erreur";
+            
             // Tea p = new Tea(9999,"yyds",33.3,100,"dsfsff","type","profil","origin","bio","pikcing","period","temperature","timing","dose","pairing","benefits","plus");
             // productRepository.save(p);
 
@@ -123,7 +134,7 @@ public class ClientController {
             // List<Tea> greenTea = teaRespository.findByType("thé vert");
             // System.out.println(greenTea);
          
-            return "home";
+            
         }
 
     @Autowired private TeaRepository teaRepository;
