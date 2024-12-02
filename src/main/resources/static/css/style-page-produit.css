@@ -133,6 +133,11 @@ p{
     cursor: pointer;
     margin-left: 20px;
 }
+
+#accessory-price{
+
+    margin-top: 8vw;
+}
 .pochette{
     width: 40%;
 }
@@ -192,6 +197,10 @@ p{
     font-size: 18px;
 }
 
+
+.empty{
+    width: 40vh;
+}
 .under-product{
     margin: 3% 5%;
     line-height: 1.8rem;

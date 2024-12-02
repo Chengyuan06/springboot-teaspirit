@@ -23,20 +23,20 @@ public class Tea extends Product {
 
 
 
-    public Tea(String sku, String name, double price, int quantity, String image) {
-        super(sku, name, price, quantity, image);
+    public Tea(String sku, String name, double price, int quantity, String image1, String image2) {
+        super(sku, name, price, quantity, image1, image2);
     }
 
-    public Tea(String sku, String name, double price, int quantity, String image, String profil){
-        super(sku, name, price, quantity, image);
+    public Tea(String sku, String name, double price, int quantity, String image1, String image2, String profil){
+        super(sku, name, price, quantity, image1, image2);
         this.profil = profil;
     }
 
 
-    public Tea(String sku, String name, double price,int quantity, String image, String type, String profil, String origin, String bio,
+    public Tea(String sku, String name, double price,int quantity, String image1, String image2, String type, String profil, String origin, String bio,
             String picking, String period, String temperature, String timing, String dose, String pairing,
             String benefits, String plus) {
-        super(sku, name, price,quantity, image);
+        super(sku, name, price,quantity, image1, image2);
         this.type = type;
         this.profil = profil;
         this.origin = origin;

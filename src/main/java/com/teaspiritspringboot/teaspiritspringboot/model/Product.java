@@ -14,7 +14,8 @@ public class Product {
     private String name;
     private double price;
     private int quantity;
-    private String image;
+    private String image1;
+    private String image2;
     private boolean is_deleted;
 
     /* Si la clé primaire est auto-incrément, il faut ajouter @ GenerateValue juste après @Id
@@ -26,12 +27,13 @@ public class Product {
 
 
     //constructeurs:
-    public Product(String sku, String name, double price, int quantity, String image){
+    public Product(String sku, String name, double price, int quantity, String image1, String image2){
         this.sku = sku;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.image = image;
+        this.image1 = image1;
+        this.image2 = image2;
         this.is_deleted = false;
 
     }
@@ -43,8 +45,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product [sku=" + sku + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", image="
-                + image + ", is_deleted=" + is_deleted + "]";
+        return "Product [sku=" + sku + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", image1="
+                + image1 + ", image2 ="+ image2 + ", is_deleted=" + is_deleted + "]";
     }
 
     public String getSku() {
@@ -79,12 +81,20 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getImage() {
-        return image;
+    public String getImage1() {
+        return image1;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getImage2(){
+        return image2;
+    }
+
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
     }
 
     public boolean isIsDeleted() {

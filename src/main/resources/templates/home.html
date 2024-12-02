@@ -13,7 +13,7 @@
 <body>
     <main id="page-content">
         <header th:style="'background-image: url(/images/head-feuille.png)'">
-            <a id="logo-lien" th:href="@{/products/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
+            <a id="logo-lien" th:href="@{/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
            <section class="bar-top">
                 <div class="menu-and-search">
                     <div class="burger">
@@ -22,25 +22,26 @@
                         </button>
                         <ul id="list-burger">
                             <li id="menu-item-thé" class="menu-item">
-                                <button class="btn-menu"><a th:href="@{/products/alltea}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                <button class="btn-menu"><a th:href="@{/teaspirit/tea}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
                                 <div id="item-content-thé" class="item-content">
-                                    <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
-                                    <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>
-                                    <a th:href="@{/products/tea/filter(type='thé jaune')}">Thé Jaune</a>
-                                    <a th:href="@{/products/tea/filter(type='thé noir')}">Thé Noir</a>
-                                    <a th:href="@{/products/tea/filter(type='oolong')}">Oolong</a>
-                                    <a th:href="@{/products/tea/filter(type='pu erh')}">Pu Erh</a>
+                                    <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
+                                    <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
+                                    <a th:href="@{/teaspirit/tea/bytype(type='thé vert')}">Thé Vert</a>
+                                    <a th:href="@{/teaspirit/tea/bytype(type='thé jaune')}">Thé Jaune</a>
+                                    <a th:href="@{/teaspirit/tea/bytype(type='thé noir')}">Thé Noir</a>
+                                    <a th:href="@{/teaspirit/tea/bytype(type='oolong')}">Oolong</a>
+                                    <a th:href="@{/teaspirit/tea/bytype(type='pu erh')}">Pu Erh</a>
                                 </div>
                             </li>
                             <li class="menu-item"><button class="btn-menu"><a href="#">Coffrets</a></button></li>
 
                             <li id="menu-item-accesoires" class="menu-item">
-                                <button class="btn-menu"><a href="#">Accesoires</a><i id="fleche-accesoires" class="fa fa-caret-down"></i> </button>
+                                <button class="btn-menu"><a th:href="@{/teaspirit/accessory}">Accesoires</a><i id="fleche-accesoires" class="fa fa-caret-down"></i> </button>
                                 <div id="item-content-accesoires" class="item-content">
-                                    <a href="#">Théières</a>
-                                    <a href="#">Tasses</a>
-                                    <a href="#">Ustensiles</a>
-            
+                                    <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
+                                    <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
+                                    <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
+                    
                                 </div>
                             </li>
             
@@ -51,7 +52,7 @@
                             </li>
                         </ul>      
                     </div>
-                    <form role="search" th:action="@{/products/search}" th:method="post">
+                    <form role="search" th:action="@{/teaspirit/search}" th:method="get">
                         <!-- role="search" permet aux lecteurs d'écran d'indiquer le formulaire comme étant un formulaire de recherche.
                         WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) est une spécification écrite par le W3C, 
                         qui définit un ensemble d'attributs HTML supplémentaires, qui peuvent être appliqués 
@@ -71,7 +72,7 @@ Note: Only form elements with a name attribute will have their values passed whe
                 
                 <div class="user-cart">
                     <button id="user">
-                        <img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image">
+                        <a th:href="@{/teaspirit/user/login}"><img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image"></a>
                     </button>
                     <button id="cart">
                         <img th:src="@{/images/cart-64.png}" alt="cart image">
@@ -81,14 +82,15 @@ Note: Only form elements with a name attribute will have their values passed whe
             </section>
             <nav class="menu">
                 <div class="dropdown">
-                    <a th:href="@{/products/alltea}">Thés</a>
+                    <a th:href="@{/teaspirit/tea}">Thés</a>
                     <div class="dropdown-content">
-                        <a th:href="@{/products/tea/filter(type='thé blanc')}">Thé Blanc</a>
-                        <a th:href="@{/products/tea/filter(type='thé vert')}">Thé Vert</a>
-                        <a th:href="@{/products/tea/filter(type='thé jaune')}">Thé Jaune</a>
-                        <a th:href="@{/products/tea/filter(type='thé noir')}">Thé Noir</a>
-                        <a th:href="@{/products/tea/filter(type='oolong')}">Oolong</a>
-                        <a th:href="@{/products/tea/filter(type='pu erh')}">Pu Erh</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
+                        <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé vert')}">Thé Vert</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé jaune')}">Thé Jaune</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé noir')}">Thé Noir</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='oolong')}">Oolong</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='pu erh')}">Pu Erh</a>
 
                     </div>
                 </div>
@@ -96,11 +98,13 @@ Note: Only form elements with a name attribute will have their values passed whe
                     <a href="#">Coffrets</a>
                 </div>
                 <div class="dropdown">
-                    <a href="#">Accesoires</a>
+                    <a th:href="@{/teaspirit/accessory}">Accesoires</a>
                     <div class="dropdown-content">
-                        <a href="#">Théières</a>
-                        <a href="#">Tasses</a>
-                        <a href="#">Ustensiles</a>
+
+                        <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
+                        <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
+                        <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
+                    </div>
 
                     </div>
                 </div>
@@ -130,9 +134,9 @@ Note: Only form elements with a name attribute will have their values passed whe
             <h3>Notre Sélection</h3>
             <ul class="exemples">
                 <li class="selection" th:each="selection: ${selections}">
-                    <a th:href="@{/products/bysku(sku=${selection.sku})}">
+                    <a th:href="@{/teaspirit/bysku(sku=${selection.sku})}">
                     <figure>
-                        <img th:src="${selection.image}" alt="image de thé">
+                        <img th:src="${selection.image1}" alt="image de thé">
                         <figcaption>
                             <h4 th:text="${selection.name}">Notre Sélection</h4>
                             <h5 th:text="${selection.profil}">Profil aromatique de thé</h5>
@@ -144,6 +148,7 @@ Note: Only form elements with a name attribute will have their values passed whe
                     <button class="add">AJOUTER AU PANIER</button>
                 </li> 
             </ul>
+        </section>    
         <footer>
             <section class="footer-top">
                  <ul class="footer-icon">

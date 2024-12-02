@@ -42,6 +42,23 @@
     line-height: 2rem;
 }
 
+#error {
+    font-size: 1.5rem ;
+    text-align: center;
+    margin: 1.25rem;
+}
+#main-image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: block;
+    height: 25vh;
+    font-size: 3rem;
+    padding: 5vw;
+    text-align: center;
+    color: white;
+    font-family:"allura";
+  
+}
 ul{
     display: flex;
     justify-content: space-around;
@@ -66,10 +83,13 @@ ul{
 }
 .selection{
     width: 25%;
+    min-height: 50%;
+    height: 70vh;
     margin-bottom: 6.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     transition: transform 0.3s;
 
 }

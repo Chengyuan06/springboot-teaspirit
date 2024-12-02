@@ -25,7 +25,7 @@ import com.teaspiritspringboot.teaspiritspringboot.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
 
-    Product findBySku(String sku);
+    Page<Product> findBySku(String sku, Pageable pageable);
     Page<Product> findByNameContains(String name,Pageable pageable);
     // une méthode fournie par JPA est findById() qui retrouve une donnée par la clé primaire, cette méthode renvoie un résulat de <Optional>
     //donc je veux une méthode qui est nommé à une autre façon pas comme findById() et qui retrouve une donnée par la clé primaire, 
@@ -49,8 +49,8 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
      @Transactional
      @Modifying
-     @Query("UPDATE Product p SET p.sku = :newSku, p.name = :newName, p.price = :newPrice, p.quantity = :newQuantity, p.image= :newImage WHERE p.sku = :sku")
-     int updateProuctInfo(@Param("newSku") String newSku, @Param("newName") String newName, @Param("newPrice") double newPrice, @Param("newQuantity") int newQuantity, @Param("newImage") String newImage, @Param("sku") String sku);
+     @Query("UPDATE Product p SET p.sku = :newSku, p.name = :newName, p.price = :newPrice, p.quantity = :newQuantity, p.image1= :newImage1, p.image2 = :newImage2 WHERE p.sku = :sku")
+     int updateProuctInfo(@Param("newSku") String newSku, @Param("newName") String newName, @Param("newPrice") double newPrice, @Param("newQuantity") int newQuantity, @Param("newImage1") String newImage1,@Param("newImage2") String newImage2,@Param("sku") String sku);
 
 
 

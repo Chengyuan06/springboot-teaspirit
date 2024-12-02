@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produit - [[${accessory.name}]]</title>
+    <link rel="stylesheet" th:href="@{/css/basic.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/style-page-produit.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <main id="page-content">
+        <header th:style="'background-image: url(/images/head-feuille.png)'">
+            <a id="logo-lien" th:href="@{/teaspirit}"><img id="logo" th:src="@{/images/logo.png}" alt="logo TeaSpirit"></a>
+                <section class="bar-top">
+                    <div class="menu-and-search">
+                        <div class="burger">
+                            <button id="btn-burger">
+                                <img th:src="@{/images/menu-burger-64.png}" alt="menu-principal">
+                            </button>
+                            <ul id="list-burger">
+                                <li id="menu-item-thé" class="menu-item">
+                                    <button class="btn-menu"><a th:href="@{/teaspirit/tea}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                    <div id="item-content-thé" class="item-content">
+                                        <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
+                                        <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
+                                        <a th:href="@{/teaspirit/tea/bytype(type='thé vert')}">Thé Vert</a>
+                                        <a th:href="@{/teaspirit/tea/bytype(type='thé jaune')}">Thé Jaune</a>
+                                        <a th:href="@{/teaspirit/tea/bytype(type='thé noir')}">Thé Noir</a>
+                                        <a th:href="@{/teaspirit/tea/bytype(type='oolong')}">Oolong</a>
+                                        <a th:href="@{/teaspirit/tea/bytype(type='pu erh')}">Pu Erh</a>
+                                    </div>
+                                </li>
+                                <li class="menu-item"><button class="btn-menu"><a href="#">Coffrets</a></button></li>
+
+                                <li id="menu-item-accesoires" class="menu-item">
+                                    <button class="btn-menu"><a th:href="@{/teaspirit/accessory}">Accesoires</a><i id="fleche-accesoires" class="fa fa-caret-down"></i> </button>
+                                    <div id="item-content-accesoires" class="item-content">
+                                        <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
+                                        <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
+                                        <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
+                
+                                    </div>
+                                </li>
+                
+                                <li id="menu-item-guide" class="menu-item">
+                                    <button class="btn-menu"><a href="#">Guide du thé</a></button>
+                                    <div id="item-content-guide" class="item-content">
+                                    </div>
+                                </li>
+                            </ul>      
+                        </div>
+                        <form th:action="@{/teaspirit/search}" th:method="get" role="search">
+                            <div class="search">
+                                <label for="search"><input type="search" placeholder="Jasmine" name="query"/></label>
+                                <button id="search-button" type="submit">
+                                    <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
+                                </button>
+                            </div>
+                        </form>
+                        
+                     </div>
+                
+                    <div class="user-cart">
+                        <button id="user">
+                            <img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image">
+                        </button>
+                        <button id="cart">
+                            <img th:src="@{/images/cart-64.png}" alt="cart image">
+                        </button>
+
+                    </div>
+                </section>
+            <nav class="menu">
+                <div class="dropdown">
+                    <a th:href="@{/teaspirit/tea}">Thés</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé vert')}">Thé Vert</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé jaune')}">Thé Jaune</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='thé noir')}">Thé Noir</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='oolong')}">Oolong</a>
+                        <a th:href="@{/teaspirit/tea/bytype(type='pu erh')}">Pu Erh</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#">Coffrets</a>
+                </div>
+                <div class="dropdown">
+                    <a th:href="@{/teaspirit/accessory}">Accesoires</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
+                        <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
+                        <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
+
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#">Guide du thé</a>
+                </div>
+
+            </nav>  
+        </header>
+            <section class="product" >
+                <div class="product-content" >
+                    <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <img th:src="@{${accessory.image1}}" alt="image de produit">
+                    </div>
+                    <div class="mySlides fade">
+                        <img th:src="@{${accessory.image2}}" alt="image de d'emballage">
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1)">❮</a>
+                    <a class="next" onclick="plusSlides(1)">❯</a>
+                    </div>
+                    <br>
+                    <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span> 
+                    <span class="dot" onclick="currentSlide(2)"></span> 
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h1 th:text="${accessory.name}">Product name</h1>
+                    <p th:text="'Référence: '+${accessory.sku}">Product Sku</p> <br>
+                    <h2 th:text="${accessory.material}">Product material</h2>
+                    <h2 th:text="${accessory.size}">Product size</h2>
+                    <h2 th:text="${accessory.care}">Suggestion of care service</h2>
+                    <br>
+                    <div id="accessory-price" class="price-quantity">
+                        <h2 class="price" th:text="${accessory.price} + '€'">Price</h2>
+                    </div>
+                    <div class="add-cart">
+                        <input type="text" placeholder="+1" id="quantity">
+                        <label for="quantity"></label>
+                        <button class="add">AJOUTER AU PANIER</button>
+                    </div>  
+                </div>
+
+                <div class="empty"></div>
+            </section>
+        <footer>
+            <section class="footer-top">
+                <ul class="footer-icon">
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/livraison.png}"  alt="livraison offerte dès 60€ d'achats">
+                            <br>
+                            <figcaption>LIVRAISON OFFERTE <br>DÈS 60€ D'ACHATS</figcaption>
+
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/lock.png}" alt="paiement sécurisé">
+                            <br>
+                            <figcaption>PAIEMENT SÉCURISÉ</figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/box.png}" alt="expédition en 72h">
+                            <br>
+                            <figcaption>EXPÉDITION EN 72H</figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img th:src="@{/images/recycle.png}" alt="emballages recyclés">
+                            <br>
+                            <figcaption>TOUS NOS EMBALLAGES<br>SONT RECYCLABLES</figcaption>
+                        </figure>
+                        
+                    </li>
+                </ul>
+
+            </section>
+            <div id="bar"></div>
+            <section class="footer-bottom" th:style="'background-image:url(/images/fond-footer2.png)'">
+                <ul class="contact">
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Notre Histoire</a></li>
+                    <li><a href="#">Conditions Génarales de Vente</a></li>
+                    <li><a href="#">Mention Légales</a></li>
+                </ul>
+
+            </section>
+        </footer>
+    </main>
+<script type="text/javascript" th:src="@{/js/js-produit.js}"></script>  
+</body>
+</html>

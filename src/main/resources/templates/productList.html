@@ -23,7 +23,7 @@
                         </button>
                         <ul id="list-burger">
                             <li id="menu-item-thé" class="menu-item">
-                                <button class="btn-menu"><a th:href="@{/teaspirit/tea}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                <button class="btn-menu"><a th:href="@{/teaspirit/product}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
                                 <div id="item-content-thé" class="item-content">
                                     <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
                                     <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
@@ -74,7 +74,7 @@
             </section>
             <nav class="menu">
                 <div class="dropdown">
-                    <a th:href="@{/teaspirit/tea}">Thés</a>
+                    <a th:href="@{/teaspirit/product}">Thés</a>
                     <div class="dropdown-content">
                         <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
                         <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
@@ -83,7 +83,6 @@
                         <a th:href="@{/teaspirit/tea/bytype(type='thé noir')}">Thé Noir</a>
                         <a th:href="@{/teaspirit/tea/bytype(type='oolong')}">Oolong</a>
                         <a th:href="@{/teaspirit/tea/bytype(type='pu erh')}">Pu Erh</a>
-                    </div>
 
                     </div>
                 </div>
@@ -96,7 +95,6 @@
                         <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
                         <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
                         <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
-
                     </div>
                 </div>
 
@@ -108,20 +106,20 @@
         </header>
         <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">la pureté de la tradition</div>
     
-        <div th:if="${!teas.empty}">
+        <div th:if="${!products.empty}">
             <section id = "tealist">
-                <div class="product" th:each="tea: ${teas.content}">
-                    <!-- th:each : est une boucle de foreach; pour tea: est l'objet récupéré de la liste teas
-                    teas fait référence de l'objet Page<teas>, cet objet a plusiuers propriétés utiles pour la pagination, comme content, number, totalPages, etc.
-                    teas.content: cette propriété représente la liste de tous les éléments (ici, chaque Tea) de la page actuelle -->
+                <div class="product" th:each="product: ${products.content}">
+                    <!-- th:each : est une boucle de foreach; pour product: est l'objet récupéré de la liste products
+                    products fait référence de l'objet Page<products>, cet objet a plusiuers propriétés utiles pour la pagination, comme content, number, totalPages, etc.
+                    products.content: cette propriété représente la liste de tous les éléments (ici, chaque product) de la page actuelle -->
                     <!-- chaque fois que Thymeleaf rencontre cette directive, il va générer un <div> pour 
-                    chaque produit de thé contenu dans teas.content, en utilisant la variable tea pour insérer les valeurs spécifiques à ce produit dans le HTML. -->
-                    <a th:href="@{/teaspirit/bysku(sku=${tea.sku})}">
+                    chaque produit de thé contenu dans products.content, en utilisant la variable product pour insérer les valeurs spécifiques à ce produit dans le HTML. -->
+                    <a th:href="@{/teaspirit/bysku(sku=${product.sku})}">
                         <figure>
-                            <img class="product-image" th:src="${tea.image1}" alt="image de produit">
+                            <img class="product-image" th:src="${product.image1}" alt="image de produit">
                             <figcaption>
-                                <h4 th:text="${tea.name}">Product Name</h4>
-                                <h5 class="prix" th:text="${tea.price} + '€'"> Product Price</h5>
+                                <h4 th:text="${product.name}">Product Name</h4>
+                                <h5 class="prix" th:text="${product.price} + '€'"> Product Price</h5>
                             </figcaption>
                         </figure> 
                     </a>
@@ -129,21 +127,25 @@
                 </div>
                 
             </section>
+
+          
+            <div id="error" th:if="${products.empty}">Aucun produit correspond à votre recherche</div>
         </div>
         <div class="pagination">
-            <span th:text="'Page ' + ${teas.number + 1} + ' sur ' + ${teas.totalPages}"></span>
+            <span th:text="'Page ' + ${products.number + 1} + ' sur ' + ${products.totalPages}"></span>
             <div>
-                <a th:if="${teas.hasPrevious()}" th:href="@{tea/filter(type=${type},page=${teas.number - 1})}">&laquo;</a>
-             <!-- teas.number est une propriété directement accessible de l'objet Page en Spring Data JPA. Le number représente la page actuelle, 
-              d'où sa simplicité d'accès sans méthode intermédiaire. Et c'est pourquoi tu vois teas.number plutôt que teas.getNumber().-->
+                <a th:if="${products.hasPrevious()}" th:href="@{/search(query=${query},page=${products.number - 1})}">&laquo;</a>
+             <!-- products.number est une propriété directement accessible de l'objet Page en Spring Data JPA. Le number représente la page actuelle, 
+              d'où sa simplicité d'accès sans méthode intermédiaire. Et c'est pourquoi tu vois products.number plutôt que products.getNumber().-->
              <!-- ${} est une variable de Thymeleaf -->
-                <a th:if="${teas.hasNext()}" th:href="@{tea/filter(type=${type},page=${teas.number + 1})}">&raquo;</a>
-                <!-- Thymeleaf syntax : Utilise des parenthèses () pour séparer les paramètres, comme (type=${type},page=${teas.number - 1}).
+                <a th:if="${products.hasNext()}" th:href="@{/search(query=${query},page=${products.number + 1})}">&raquo;</a>
+                <!-- Thymeleaf syntax : Utilise des parenthèses () pour séparer les paramètres, comme (type=${type},page=${products.number - 1}).
                  dans URL les paramètres sont séparés par virgule et rangés dans une (), sauf que la virgule est 
                  devenue automtiquement & dans URL -->
             </div>
         </div>
-        <!-- teas.number donne le numéro de page actuel, une méthode de Thymeleaf -->
+
+        <!-- products.number donne le numéro de page actuel, une méthode de Thymeleaf -->
         
         <footer>
             <section class="footer-top">

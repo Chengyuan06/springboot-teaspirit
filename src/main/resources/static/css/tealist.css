@@ -4,12 +4,12 @@
     background-repeat: no-repeat;
     display: block;
     height: 25vh;
-    font-size: 2rem;
+    font-size: 3rem;
     padding: 5vw;
     text-align: center;
     color: white;
-
-
+    font-family:"allura";
+  
 }
 
 .filter-bar{
@@ -23,6 +23,11 @@
   flex-wrap: wrap;
 }
 
+#error {
+    font-size: 1.5rem ;
+    text-align: center;
+    margin: 1.25rem;
+}
 
 
 .product{
