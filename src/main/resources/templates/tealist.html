@@ -64,7 +64,7 @@
                 
                 <div class="user-cart">
                     <button id="user">
-                        <img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image">
+                        <a th:href="@{/teaspirit/user/login}"><img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image"></a>
                     </button>
                     <button id="cart">
                         <img th:src="@{/images/cart-64.png}" alt="cart image">
@@ -106,7 +106,7 @@
 
             </nav>  
         </header>
-        <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">la pureté de la tradition</div>
+        <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">Nos thés 茶</div>
     
         <div th:if="${!teas.empty}">
             <section id = "tealist">
