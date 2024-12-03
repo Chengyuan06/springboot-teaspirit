@@ -26,17 +26,37 @@ public class UserController {
     }
 
     @PostMapping("/account")
-    public String account(@RequestParam String username, @RequestParam String password, Model model){
-        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username,password);
-        System.out.println(userOptional);
+    public String account(@RequestParam String identifier,
+                          @RequestParam String password,
+                          Model model){
+        Optional<User> userOptional = userRepository.findByIdentifierAndPassword(identifier,password);
         if(userOptional.isPresent()){ 
             User user = userOptional.get();
             model.addAttribute("user", user);
             return "account";
+        } else {
+            model.addAttribute("errorMessage", "Votre identifiant ou mot de passe est incorrect. Veuillez réessayer."); 
+            return "login";  
         }
-        return "error";
-      
-
     }
-    
+       
+    @PostMapping("/signup")
+    public String signup(@RequestParam String email, 
+                        @RequestParam String password, 
+                        @RequestParam(value = "customer", defaultValue = "customer") String role, 
+                        Model model){
+        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
+            model.addAttribute("errorMessage", "Email et mot de passe sont obligatoires.");
+            return "login"; // Retourner vers la vue d'inscription
+        }
+        User user = new User(email,password,role);
+        userRepository.save(user);
+        model.addAttribute("user", user);
+        return "account";
+    }
+
 }
+    
+
+
+

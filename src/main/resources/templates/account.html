@@ -131,7 +131,8 @@ Note: Only form elements with a name attribute will have their values passed whe
             </ul>
            </div>
            <div class="menu-details">
-            <h3 th:text="'Bonjour ' + ${user.username} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
+            <h3 th:if="${user.username}" th:text="'Bonjour ' + ${user.username} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
+            <h3 th:text="'Bonjour ' + ${user.email} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
             <p>À partir du menu de votre compte, vous pouvez visualiser vos commandes récentes, gérer vos adresses de livraison et de facturation ainsi que changer votre mot de passe et les détails de votre compte.</p>
            </div>
         </section>

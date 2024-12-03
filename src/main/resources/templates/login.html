@@ -86,7 +86,6 @@ Note: Only form elements with a name attribute will have their values passed whe
                     <a th:href="@{/teaspirit/tea}">Thés</a>
                     <div class="dropdown-content">
                         <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
-                        <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
                         <a th:href="@{/teaspirit/tea/bytype(type='thé vert')}">Thé Vert</a>
                         <a th:href="@{/teaspirit/tea/bytype(type='thé jaune')}">Thé Jaune</a>
                         <a th:href="@{/teaspirit/tea/bytype(type='thé noir')}">Thé Noir</a>
@@ -117,14 +116,17 @@ Note: Only form elements with a name attribute will have their values passed whe
             </nav>  
         </header>
 
+        <div class="error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
         <section class="user">
+          
             <div class="login">
                 <form action="/teaspirit/user/account" method="POST">
                     <h2>Se connecter</h2>
                     <div class="form-item">
                         <label for="identifiant-login">Identifiant ou e-mail*</label>
                         <br>
-                        <input type="text" id="identifiant-login" name="username" required >
+                        <input type="text" id="identifiant-login" name="identifier" required >
                     </div>
                     <div class="form-item">
                         <label for="password-login">Mot de passe*</label>
@@ -140,18 +142,18 @@ Note: Only form elements with a name attribute will have their values passed whe
                 </form>
             </div>
             <div class="register">
-                <form>
+                <form action="/teaspirit/user/signup" method="post">
                     <h2>S'enregistrer</h2>
                     <div class="form-item">
                         <label for="identifiant-register">E-mail*</label>
                         <br>
-                        <input type="email" id="identifiant" required>
+                        <input type="email" id="identifiant" name="email" required>
                     </div>
 
                     <div class="form-item">
                         <label for="password">Mot de passe*</label>
                         <br>
-                        <input type="password" id="password-register" required><image></image>
+                        <input type="password" id="password-register" name="password" required><image></image>
                         <div class="show-password">
                             <label for="show-register">Show Password</label>
                             <input id="show-register" type="checkbox">
