@@ -1,6 +1,7 @@
 package com.teaspiritspringboot.teaspiritspringboot.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.teaspiritspringboot.teaspiritspringboot.model.Product;
@@ -22,11 +22,13 @@ import com.teaspiritspringboot.teaspiritspringboot.model.Product;
  * ProductRepository 可以用于管理 Product 类型的数据。Product 是一个类，代表了数据库中的 product 表，而Integer 是Proudct类中主键的类型。
  * extends JpaRepository<Product, Integer> 意味着 ProductRepository 继承了 JpaRepository 的所有方法，同时可以自定义查询方法。
  */
-@Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
 
     Page<Product> findBySku(String sku, Pageable pageable);
+    Optional<Product> findBySku(String sku);
     Page<Product> findByNameContains(String name,Pageable pageable);
+
+    
     // une méthode fournie par JPA est findById() qui retrouve une donnée par la clé primaire, cette méthode renvoie un résulat de <Optional>
     //donc je veux une méthode qui est nommé à une autre façon pas comme findById() et qui retrouve une donnée par la clé primaire, 
     // il me faut que je crée cette méthode dans repository, mais je n'ai pas besoins coder les requests 

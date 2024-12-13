@@ -142,27 +142,27 @@ a:hover{
 /* écran mobile*/
 @media screen and (max-width: 480px){
 
-    header{
-        background-size: contain;
-    }
-    
+    header{background-size: contain;}
+
     #logo-lien{min-width: 20%;}
+    
     .bart-top img{
         width: 30px;
         height: 30px;
     }
     .menu-and-search{display:flex;}
+
     #menu-burger{position: relative;}
-    .burger{display: inline-block;
-    }
-    #btn-burger{
-        margin-right: 30px
-    }
+
+    .burger{display: inline-block;}
+
+    #btn-burger{margin-right: 30px}
+
     #list-burger{
         display: none;
         position:absolute;
         z-index: 1;
-        background-color: white;
+        background-color:#eceadc;
         width: 100%;  
     }
     #list-burger.show {
@@ -195,7 +195,7 @@ a:hover{
     
     .item-content{
         display: none;
-        background-color: white;
+        background-color:#eceadc;
         width: 100%; 
         text-align: left;
     }

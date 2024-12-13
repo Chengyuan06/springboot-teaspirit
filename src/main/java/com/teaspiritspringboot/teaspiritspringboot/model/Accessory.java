@@ -1,5 +1,6 @@
 package com.teaspiritspringboot.teaspiritspringboot.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -9,9 +10,16 @@ import jakarta.persistence.Table;
 @PrimaryKeyJoinColumn(name = "sku")
 public class Accessory extends Product {
 
+    @Column (name = "size", nullable = false)
     private String size;
+
+    @Column (name = "material", nullable = false)
     private String material;
+
+    @Column (name = "care", nullable = false)
     private String care;
+
+    @Column (name = "category", nullable = false)
     private String category;
 
 

@@ -134,11 +134,14 @@
                     <div id="accessory-price" class="price-quantity">
                         <h2 class="price" th:text="${accessory.price} + '€'">Price</h2>
                     </div>
-                    <div class="add-cart">
-                        <input type="text" placeholder="+1" id="quantity">
-                        <label for="quantity"></label>
-                        <button class="add">AJOUTER AU PANIER</button>
-                    </div>  
+                    <form th:action="@{/cart/add}" method="post">
+                        <input type="hidden" name="sku" th:value="${accessory.sku}" />
+                        <div class="add-to-cart">
+                            <label for="quantity"></label>
+                            <input class="quantity" type="number" id="quantity" name="quantity" min="1" value="1" required />
+                            <button  class="add-button" type="submit">Ajouter au Panier</button>
+                        </div>
+                    </form> 
                 </div>
 
                 <div class="empty"></div>

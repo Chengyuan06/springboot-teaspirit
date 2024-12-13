@@ -121,11 +121,20 @@
                             <img class="product-image" th:src="${tea.image1}" alt="image de produit">
                             <figcaption>
                                 <h4 th:text="${tea.name}">Product Name</h4>
+                                <h5 th:text="${tea.profil}">Profil aromatique de thé</h5>
+                                <h5>Pochette vrac 100g</h5>
                                 <h5 class="prix" th:text="${tea.price} + '€'"> Product Price</h5>
                             </figcaption>
                         </figure> 
                     </a>
-                    <button class="add">AJOUTER AU PANIER</button>
+                    <form th:action="@{/cart/add}" method="post">
+                        <input type="hidden" name="sku" th:value="${tea.sku}" />
+                        <div class="add-to-cart">
+                            <label for="quantity"></label>
+                            <input class="quantity" type="number" id="quantity" name="quantity" min="1" value="1" required />
+                            <button  class="add-button" type="submit">Ajouter au Panier</button>
+                        </div>
+                    </form>
                 </div>
                 
             </section>

@@ -1,5 +1,6 @@
 package com.teaspiritspringboot.teaspiritspringboot.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -8,19 +9,41 @@ import jakarta.persistence.Table;
 @Table(name = "tea")
 @PrimaryKeyJoinColumn(name = "sku")
 public class Tea extends Product {
+    @Column (name = "type", nullable = false)
     private String type;
-    private String profil;
-    private String origin;
-    private String bio;
-    private String picking;
-    private String period;
-    private String temperature;
-    private String timing;
-    private String dose;
-    private String pairing;
-    private String benefits;
-    private String plus;
 
+    @Column (name = "profil", nullable = false)
+    private String profil;
+
+    @Column (name = "origin", nullable = false)
+    private String origin;
+
+    @Column (name = "bio", nullable = false)
+    private String bio;
+
+    @Column (name = "picking", nullable = false)
+    private String picking;
+
+    @Column (name = "period", nullable = false)
+    private String period;
+
+    @Column (name = "temperature", nullable = false)
+    private String temperature;
+
+    @Column (name = "timing", nullable = false)
+    private String timing;
+
+    @Column (name = "dose", nullable = false)
+    private String dose;
+
+    @Column (name = "pairing", nullable = false)
+    private String pairing;
+
+    @Column (name = "benefits", nullable = false)
+    private String benefits;
+
+    @Column (name = "plus", nullable = false)
+    private String plus;
 
 
     public Tea(String sku, String name, double price, int quantity, String image1, String image2) {

@@ -1,4 +1,5 @@
 package com.teaspiritspringboot.teaspiritspringboot.model;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
@@ -10,21 +11,31 @@ import jakarta.persistence.Table;
 @Table( name = "product") // @Table(name = "product") 注解：指定了这个实体类映射的数据库表的名称是 product。
 public class Product {
     @Id
+    @Column (name = "sku", nullable = false)
     private String sku; // @Id est juste l'atonnation pour l'attribut sku. Pour indiquer sku est la clé primaire dans BDD
+    
+    @Column (name = "name", nullable = false)
     private String name;
+
+    @Column (name = "price", nullable = false)
     private double price;
+
+    @Column (name = "quantity", nullable = false)
     private int quantity;
+
+    @Column (name = "image1", nullable = false)
     private String image1;
+
+    @Column (name = "image2", nullable = false)
     private String image2;
+
+    @Column (name = "is_deleted", nullable = false)
     private boolean is_deleted;
 
     /* Si la clé primaire est auto-incrément, il faut ajouter @ GenerateValue juste après @Id
      * @Id 和 @GeneratedValue(strategy = GenerationType.IDENTITY) 注解：标记 id 字段为一个自动递增的主键。
      * ID 字段通常是一个表的主键。@GeneratedValue 注解用于指定主键生成策略，这里使用了 IDENTITY 策略，表示数据库自动生成主键值。
      */
-
-    
-
 
     //constructeurs:
     public Product(String sku, String name, double price, int quantity, String image1, String image2){

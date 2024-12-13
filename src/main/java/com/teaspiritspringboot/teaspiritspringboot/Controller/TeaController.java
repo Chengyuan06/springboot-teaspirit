@@ -22,7 +22,6 @@ import org.springframework.ui.Model;
 @RequestMapping("/teaspirit/tea") //Base URL /products : Toutes les routes de ce contrôleur commenceront par /products
 public class TeaController {
   
-
     @Autowired private TeaRepository teaRepository;
     @GetMapping()
         public String geAllTeas(Model model, Pageable pageable){
@@ -48,7 +47,7 @@ public class TeaController {
     public String getTheVert(@RequestParam String type, Model model, Pageable pageable) {
         Page<Tea> teas = teaRepository.findByType(type, pageable);
         if(!teas.isEmpty()){
-            model.addAttribute("teas", teas); // dans HTML, chaque fois quand il y a 'products' dans th:, il passe l'objet teas
+            model.addAttribute("teas", teas); // dans HTML, chaque fois quand il y a 'teas' dans th:, il passe l'objet teas
             model.addAttribute("type", type);
             return "teaList";
         }

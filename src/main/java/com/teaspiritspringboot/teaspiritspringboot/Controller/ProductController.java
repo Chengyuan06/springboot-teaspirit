@@ -2,7 +2,6 @@ package com.teaspiritspringboot.teaspiritspringboot.Controller;
 
 import java.util.Collections;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.teaspiritspringboot.teaspiritspringboot.model.Accessory;
 import com.teaspiritspringboot.teaspiritspringboot.model.Product;
 import com.teaspiritspringboot.teaspiritspringboot.model.Selection;
@@ -39,7 +37,7 @@ public class ProductController {
             model.addAttribute("selections", selections);
             return "home";
         }
-        return "emptyPage";
+        return "noResult";
         
         // Tea p = new Tea(9999,"yyds",33.3,100,"dsfsff","type","profil","origin","bio","pikcing","period","temperature","timing","dose","pairing","benefits","plus");
         // productRepository.save(p);
@@ -93,7 +91,7 @@ public class ProductController {
              */
         } 
     
-        return "emptyPage";
+        return "noResult";
    
      }
 
@@ -133,7 +131,7 @@ public class ProductController {
             if (selections != null) {
                 model.addAttribute("selections", selections);
             }
-            return "emptyPage";
+            return "noResult";
         }
 
         model.addAttribute("products", products);

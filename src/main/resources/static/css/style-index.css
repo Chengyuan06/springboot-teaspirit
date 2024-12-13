@@ -81,6 +81,7 @@ ul{
     padding: 3rem 0;
 
 }
+
 .selection{
     width: 25%;
     min-height: 50%;
@@ -144,6 +145,44 @@ figcaption h5{
     margin: 10px
 }
 
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le champ et le bouton */
+}
+
+.quantity {
+    width: 50px; /* Largeur de l'input */
+    text-align: center;
+    font-size: 16px;
+    border: 2px solid;
+    border-radius: 5px;
+    color: #CDC4A9;
+    padding: 5px;
+}
+
+.add-button {
+    background-color: #CDC4A9; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.add-button:hover {
+    background-color: #45a049; /* Couleur au survol */
+}
+
+.quantity:focus {
+    outline: none;
+    border-color: #45a049; /* Couleur de la bordure lorsque l'input est actif */
+}
+
+
 
 
 /* écran mobile*/
@@ -156,48 +195,36 @@ figcaption h5{
         font-size: 2rem;
         padding-left: 40%
     }
-
     .presentation{
         padding: 1rem;
         background-color: #CDC4A9;
-    
     }
-    
     #rond{
       margin: 0 3vw;
       box-shadow: 1px 2px 2px black;
-  
     }
     #valeur-mobile{
         display: block;
         line-height: 1.5rem;}
     
     #valeur-pc{display: none;}
-   
-
     .notre-selection h3{
         font-size: 1.5rem;
         font-weight: normal;
         padding: 1.5rem 0;
-    
     }
-
     .exemples{
         padding:0 1.5rem;
     }
-
     .exemples li{
         width: 50%;
         margin-bottom: 2rem;
-    
+        max-height: 350px;
     }
-    
     .add{
         width: 10rem;
         font-size:14px;
-
     }
-
     figcaption h4{
         font-size: 1rem;
     }

@@ -31,6 +31,7 @@
 
 
 .product{
+   height: 27rem;
    width: 20%;
    margin: 2vw;
    display: flex;
@@ -101,6 +102,46 @@ figcaption h5{
     height: 2.5rem;
     margin: 10px
 }
+
+
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le champ et le bouton */
+}
+.quantity {
+    width: 50px; /* Largeur de l'input */
+    text-align: center;
+    font-size: 16px;
+    border: 2px solid;
+    border-radius: 5px;
+    color: #CDC4A9;
+    padding: 5px;
+}
+
+.add-button {
+    background-color: #CDC4A9; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.add-button:hover {
+    background-color: #45a049; /* Couleur au survol */
+}
+
+.quantity:focus {
+    outline: none;
+    border-color: #45a049; /* Couleur de la bordure lorsque l'input est actif */
+}
+
+
+
 
 .pagination{
     display: flex;

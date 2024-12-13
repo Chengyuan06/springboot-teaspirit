@@ -7,7 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/basic.css}" />
     <link rel="stylesheet" th:href="@{/css/header.css}" />
     <link rel="stylesheet" th:href="@{/css/style-index.css}" />
-    <link rel="stylesheet" th:href="@{/css/login.css}" />
     <link rel="stylesheet" th:href="@{/css/account.css}" />
     <link rel="stylesheet" th:href="@{/css/footer.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -74,7 +73,7 @@ Note: Only form elements with a name attribute will have their values passed whe
                 
                 <div class="user-cart">
                     <button id="user">
-                        <a th:href="@{/teaspirit/login}"><img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image"></a>
+                        <a th:href="@{/teaspirit/user/account}"><img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image"></a>
                     </button>
                     <button id="cart">
                         <img th:src="@{/images/cart-64.png}" alt="cart image">
@@ -123,16 +122,17 @@ Note: Only form elements with a name attribute will have their values passed whe
         <section class="user-information">
            <div class="user-menu">
             <ul>
-                <li><a href="#">Compte information</a></li>
+                <li><a th:href="@{/teaspirit/user/profil}">Compte information</a></li>
                 <li><a href="#">Commandes</a></li>
                 <li><a href="#">Adresses</a></li>
                 <li><a href="#">Moyens de paiement</a></li>
-                <li><a href="#">Se déconnecter</a></li>
+                <li><a th:href="@{/teaspirit/user/logout}">Se déconnecter</a></li>
             </ul>
            </div>
            <div class="menu-details">
             <h3 th:if="${user.username}" th:text="'Bonjour ' + ${user.username} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
-            <h3 th:text="'Bonjour ' + ${user.email} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
+            <h3 th:unless="${user.username}" th:text="'Bonjour ' + ${user.email} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
+            
             <p>À partir du menu de votre compte, vous pouvez visualiser vos commandes récentes, gérer vos adresses de livraison et de facturation ainsi que changer votre mot de passe et les détails de votre compte.</p>
            </div>
         </section>

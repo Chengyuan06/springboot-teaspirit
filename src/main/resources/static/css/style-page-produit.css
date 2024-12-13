@@ -89,6 +89,51 @@ ul{
     animation-duration: 1.5s;
   }
   
+  .add{
+    background-color: #CDC4A9;
+    border: none;
+    width:14.375rem;
+    height: 2.5rem;
+    margin: 10px
+}
+
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le champ et le bouton */
+}
+
+.quantity {
+    width: 50px; /* Largeur de l'input */
+    margin-left: -10px;
+    text-align: center;
+    border: 2px solid;
+    border-radius: 5px;
+    color: #CDC4A9;
+    padding: 5px;
+}
+
+.add-button {
+    background-color: #CDC4A9; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.add-button:hover {
+    background-color: #45a049; /* Couleur au survol */
+}
+
+.quantity:focus {
+    outline: none;
+    border-color: #45a049; /* Couleur de la bordure lorsque l'input est actif */
+}
+
   @keyframes fade {
     from {opacity: .4} 
     to {opacity: 1}
@@ -136,7 +181,7 @@ p{
 
 #accessory-price{
 
-    margin-top: 8vw;
+    margin: 6vw 0 2vw 0;
 }
 .pochette{
     width: 40%;
@@ -148,28 +193,6 @@ p{
 .pochette figcaption{
     font-size: 10px;
     text-align: center;
-}
-.add-cart input{
-    width: 25px; /* 输入框的宽度 */
-    padding: 5px; /* 用于调整输入框内部内容与边框之间的距离 */
-    border: none; /* 去掉所有边框 */
-    outline: none; /* 去掉输入框聚焦时的轮廓 */
-    font-size: 16px; /* 调整字体大小 */
-    background-color:#35632F;
-}
-.add-cart{
-    margin-top: 20px;
-}
-.add-cart button{
-    padding: 5px 15px; /* 用于调整输入框内部内容与边框之间的距离 */
-    border: none; /* 去掉所有边框 */
-    outline: none; /* 去掉输入框聚焦时的轮廓 */
-    font-size: 16px; /* 调整字体大小 */
-    background-color:#35632F;
-    color: white;
-    height: 100%;
-    box-sizing: border-box;
-
 }
 
 .advise{

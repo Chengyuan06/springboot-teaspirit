@@ -31,9 +31,7 @@ public class AccessoryController {
 
     @GetMapping("/filter")
     public String getAccessoriesFiltered(@RequestParam("category") String category, Model model, Pageable pageable){
-        System.out.println("Category received: " + category);
         Page<Accessory> accessories = accessoryRepository.findByCategory(category, pageable);
-        System.out.println("Accessories found: " + accessories.getContent());
         if(!accessories.isEmpty()){
             model.addAttribute("accessories", accessories);
         } else {

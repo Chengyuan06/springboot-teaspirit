@@ -1,0 +1,58 @@
+ /* Style général pour le formulaire */
+.profil-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.user-information {
+    justify-content: start;
+}
+
+/* Style des champs */
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+
+/* Style pour le bouton */
+.confirm-button {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    color: #fff;
+    background-color: #35632F;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* Indications sous les champs */
+.form-info {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* Champs obligatoires */
+.must:after {
+    content: " *";
+    color: red;
+}
+
+.message {
+    text-align: center;
+    margin: 15px;
+    color:#35632F;
+    font-size: 1.25rem;
+}
