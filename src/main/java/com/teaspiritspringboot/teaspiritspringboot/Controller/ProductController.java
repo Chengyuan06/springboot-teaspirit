@@ -1,151 +1,185 @@
 package com.teaspiritspringboot.teaspiritspringboot.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import com.teaspiritspringboot.teaspiritspringboot.model.Tea;
-import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
-import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRespository;
-
-import java.util.Optional;
+import java.util.Collections;
 import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.teaspiritspringboot.teaspiritspringboot.model.Accessory;
+import com.teaspiritspringboot.teaspiritspringboot.model.Product;
+import com.teaspiritspringboot.teaspiritspringboot.model.Selection;
+import com.teaspiritspringboot.teaspiritspringboot.model.Tea;
+import com.teaspiritspringboot.teaspiritspringboot.repository.AccessoryRepository;
+import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
+import com.teaspiritspringboot.teaspiritspringboot.repository.SelectionRepository;
+import com.teaspiritspringboot.teaspiritspringboot.repository.TeaRepository;
 
 
 @Controller
-@RequestMapping("/products") //Base URL /products : Toutes les routes de ce contrôleur commenceront par /products
+@RequestMapping("/teaspirit") //Base URL /products : Toutes les routes de ce contrôleur commenceront par /products
 public class ProductController {
-  @Autowired private TeaRespository teaRespository;
-  @GetMapping("/tea/{sku}") // {sku} est une variable de chemin (path variable), ce qui signifie qu'une partie de l'URL (par exemple /tea/123) sera extraite et utilisée comme paramètre dans la méthode.
-
-  //@PathVariable("sku") : Cela signifie que la valeur de {sku} dans l'URL (par exemple, 123 dans /tea/123) sera capturée et attribuée à la variable int sku.
-  //@PathVariable("sku") signifie que l'URL contiendra une variable appelée sku, comme dans /tea/{sku}.
-  // La valeur à cet emplacement dans l'URL (par exemple 123) est attribuée à la variable sku dans la méthode.
-
-    public String getProductById(@PathVariable("sku") int sku, Model model) {
-        Tea tea = teaRespository.findBySku(sku); // 获取产品详情
-        if (tea != null) {
-            model.addAttribute("tea", tea);
-    //         // L'objet Model est utilisé pour passer des attributs (données) depuis le contrôleur vers la vue (page HTML générée). Il te permet d'ajouter des données à la requête pour qu'elles soient accessibles dans la page Thymeleaf.
-    //         //Description : Cette ligne ajoute l'objet tea au modèle. Le modèle est un conteneur de données qui sera utilisé dans la vue (page Thymeleaf) pour afficher les informations du produit.
-    //         // Fonction : En ajoutant cet attribut, la page Thymeleaf pourra accéder à l'objet tea via ${tea} pour afficher ses informations comme le nom, la description, etc.
-            return "product";  // 返回产品详情页面
-        } else {
-            return "error";  // 如果没有找到产品，则返回错误页面
-        }
-    }
-
-    // Pourquoi les guillemets ? : Les guillemets sont nécessaires ici pour indiquer que "tea" est une chaîne de caractères, et cette chaîne sera le nom de l'attribut sous lequel tu veux enregistrer l'objet tea.
-    // Modèle et Vue : Cet attribut sera ensuite utilisé dans le modèle pour être accessible dans la vue (le fichier Thymeleaf). Par exemple, dans ton fichier HTML, tu pourras accéder à cet objet tea en utilisant la syntaxe ${tea} dans Thymeleaf.
 
 
-    @Autowired private ProductRepository productRepository;
-    @GetMapping("/teaspirit")
-        public String getHomePage(){
-            // Tea p = new Tea(9999,"yyds",33.3,100,"dsfsff","type","profil","origin","bio","pikcing","period","temperature","timing","dose","pairing","benefits","plus");
-            // productRepository.save(p);
+    @Autowired SelectionRepository selectionRepository;
+    @Autowired TeaRepository teaRepository;
+    @Autowired AccessoryRepository accessoryRepository;
 
-            // productRepository.softDeleteById(2222);
-
-            // System.out.println(productRepository.getAllDeleted());
-            // Tea yes = teaRespository.findByNameContains("cha");
-            // System.out.println(yes);
-
-            // productRepository.updateProuctInfo(1111, "Grenen", 0, 0, "getHomePage()", 1001);
-
-            // Tea tea = teaRespository.findBySku(1001);
-            // tea.setBenefits("dslfkjslfdklf");
+    @GetMapping()
+    public String getHomePage(Model model){
+        List<Selection> selections = selectionRepository.findAll();
+        if (selections != null) {
+            model.addAttribute("selections", selections);
             return "home";
         }
+        return "noResult";
+        
+        // Tea p = new Tea(9999,"yyds",33.3,100,"dsfsff","type","profil","origin","bio","pikcing","period","temperature","timing","dose","pairing","benefits","plus");
+        // productRepository.save(p);
 
-    @PutMapping("update/{sku}") // "Put" est le request d'update pour HTTP
-        public ResponseEntity<String> updateTea(@PathVariable int sku, @RequestBody Tea updateTea){
-            Optional<Tea> existingTea = teaRespository.findById(sku);
-            if(existingTea.isPresent()){
-                Tea tea = existingTea.get();
-                tea.setSku(updateTea.getSku());
-                tea.setName(updateTea.getName());
-                tea.setPrice(updateTea.getPrice());
-                tea.setQuantity(updateTea.getQuantity());
-                tea.setImage(updateTea.getImage());
-                tea.setType(updateTea.getType());
-                tea.setProfil(updateTea.getProfil());
-                tea.setOrigin(updateTea.getOrigin());
-                tea.setBio(updateTea.getBio());
-                tea.setPicking(updateTea.getPicking());
-                tea.setPeriod(updateTea.getPeriod());
-                tea.setTemperature(updateTea.getTemperature());
-                tea.setTiming(updateTea.getTiming());
-                tea.setDose(updateTea.getDose());
-                tea.setPairing(updateTea.getPairing());
-                tea.setBenefits(updateTea.getBenefits());
-                tea.setPlus(updateTea.getPlus());
-                teaRespository.save(tea);
-                return ResponseEntity.ok("Le produit est mis à jours avec succès");
-                // return ResponseEntity.ok(tea);
-                
-            }else{
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produit introuvable");
+        // productRepository.softDeleteById(2222);
+
+        // System.out.println(productRepository.getAllDeleted());
+        // Tea yes = teaRespository.findByNameContains("cha");
+        // System.out.println(yes);
+
+        // productRepository.updateProuctInfo(1111, "Grenen", 0, 0, "getHomePage()", 1001);
+
+        // Tea tea = teaRespository.findBySku(1001);
+        // tea.setBenefits("dslfkjslfdklf");
+
+        // List<Tea> greenTea = teaRespository.findByType("thé vert");
+        // System.out.println(greenTea);
+        
+        
+    }
+
+     @GetMapping("/bysku") 
+     public String getProduct(@RequestParam String sku, Model model) {
+        if (sku != null) {
+            if(sku.matches("^[Aa]\\d{4}$")){
+                Accessory accessory = accessoryRepository.findBySku(sku);
+                if(accessory != null){
+                    model.addAttribute("accessory", accessory);
+                    return "accessoryDetails";
+                }
             }
 
+            if(sku.matches("^[Tt]\\d{4}$")){
+                Tea tea = teaRepository.findBySku(sku);
+                if (tea != null) {
+                model.addAttribute("tea", tea);
+                return "teaDetails";
+                }   
+            }
+
+
+
+            /*
+            if(sku.matches("^[Cc]\\d{4}$")){
+                Page<GiftSet> giftSet = giftSetRepository.findBySku(sku,pageable);
+                if (!giftSet.isEmpty()) {
+                model.addAttribute("giftSet", giftSet);
+                return "giftSetDetails";
+                }   
+            }
+             */
+        } 
+    
+        return "noResult";
+   
+     }
+
+    //Route pour renvoyer un product en cliquant sur son image
+   
+    // Route pour renvoyer un résultat de recherche, soit une liste d'un produit ou des produits
+    // @Autowired ProductRepository productRepository;
+    // @GetMapping("/search")
+    // public String searchProduct(@RequestParam String query, Model model, Pageable pageable) {
+    //     Page<Product> products;
+
+    //     if (query.matches("^[A-Za-z]\\d{4}$")) {
+    //         Product product = productRepository.findBySku(query);
+    //         products = (product != null) ? ConvertProductToPage(product, pageable) : Page.empty();
+    //     } else {
+    //         products = productRepository.findByNameContains(query, pageable);
+    //         if (products.isEmpty()) {
+    //             products = Page.empty();
+    //         }
+    //     }
+
+    //     model.addAttribute("products", products);
+    //     return "productlist";
+    // }
+
+    @Autowired ProductRepository productRepository;
+    @GetMapping("/search")
+    public String searchProduct(@RequestParam String query, Model model, Pageable pageable) {
+        Page<Product> products;
+        if (query.matches("^[A-Za-z]\\d{4}$")) {
+            products = productRepository.findBySku(query, pageable);
+        } else {
+            products = productRepository.findByNameContains(query, pageable);
+        }
+        if (products.isEmpty()) {
+            List<Selection> selections = selectionRepository.findAll();
+            if (selections != null) {
+                model.addAttribute("selections", selections);
+            }
+            return "noResult";
         }
 
-        /*
-         * ResponseEntity est une classe de Spring qui représente la réponse HTTP envoyée au client (navigateur ou application) 
-         * lorsque ce dernier fait une requête. 
-         * Elle permet de contrôler à la fois le corps de la réponse et le statut HTTP (comme 200 OK, 404 Not Found, etc.).
-         * Cette méthode ResponseEntity<String> renvoie un statut HTTP avec un message comme "succes" à la fin d'opération d'update
-         * Cela me donne plus de contrôle sur la réponse
-         */
+        model.addAttribute("products", products);
+        model.addAttribute("query", query);
+        return "productList";
+    }
 
-         /*
-          * @RequestBody est une annotation de Spring. Elle indique les données renvoie par utilisateurs seront trasformé en Object
-          * en quel Objet? en objet qui suit l'annotation, dans mon cas c'est en type Product, et puis je donne un nom de variable
-          * Grâce à @RequestBody, Spring convertira automatiquement ce JSON en un objet Product
-          */
 
-          /*
-           * .isPresent() est une méthode de la classe Optional en Java. 
-           * Optional est une classe qui représente un conteneur pouvant contenir ou non une valeur
-           * Cela m'évite d'avoir à vérifier constamment si une valeur est null avant de l'utiliser.
-           * Pourquoi utiliser Optional ? Cela permet d'éviter les erreurs NullPointerException et d'écrire un code plus sûr.
-           * Plutôt que de vérifier si une valeur est null, 
-           */
-          /*
-           * ResponseEntity.ok est une méthode statique dans la classe ResponseEntity de Spring. 
-           * Elle permet de créer une réponse HTTP avec un statut 200 OK (ce qui signifie que la requête a été traitée avec succès) et, 
-           * en option, un corps de réponse (le contenu que je veux renvoyer au client).
-           */
-
-    @GetMapping("/findAllTea")
-       public ResponseEntity<List<Tea>> findAllTea(){
-         return ResponseEntity.ok(teaRespository.findAll());
+    Page<Product> ConvertProductToPage(Product product, Pageable pageable){
+        List<Product> productList;
+        if (product == null) {
+            productList = Collections.emptyList();
+        } else {
+            productList = List.of(product);
         }
-        /*
-        *  Si je n'ai pas besoin de renvoyer de données supplémentaires,
-        *  je peux simplement utiliser ResponseEntity.ok().build() pour indiquer que tout s’est bien passé :
-        *  je peux aussi renvoyer des données au client (comme un message ou un objet)
-        */
+    // Retourner une instance de PageImpl avec la liste de produits, le pageable, et la taille de la liste
+        return new PageImpl<>(productList, pageable,productList.size());
 
-    @PostMapping("/savetea")
-        public ResponseEntity<String> saveTea(@RequestBody Tea savedTea){
-            teaRespository.save(savedTea);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Le produit est bien sauvegardé dans la base de donnée");
-        }
-        /*
-         * ResponseEntity est une manière de représenter une réponse HTTP entière, y compris le statut et le corps de la réponse.
-         * status(HttpStatus.CREATED) fixe le statut HTTP à 201, qui signifie "Créé". C'est approprié après avoir ajouté une nouvelle entité. 
-         */
+
+    }
+
+   
+
+
+  /* Regular expression: regex
+   * ^ : Indique le début de la chaîne. Cela signifie que l'expression doit commencer dès le début de la chaîne.
+   *[A-Za-z] : Correspond à une seule lettre, majuscule ou minuscule.A-Z : Toutes les lettres majuscules. a-z : Toutes les lettres minuscules.
+   * \\d{4} : Correspond exactement à quatre chiffres. \\d : Correspond à un chiffre (0-9).
+   * {4} : Indique que la séquence doit se répéter exactement quatre fois.
+   * $ : Indique la fin de la chaîne. Cela signifie que l'expression doit se terminer ici.
+   * 
+   */
+
+ 
+
+    
+        //@PathVariable("sku") : Cela signifie que la valeur de {sku} dans l'URL (par exemple, 123 dans /tea/123) sera capturée et attribuée à la variable int sku.
+        //@PathVariable("sku") signifie que l'URL contiendra une variable appelée sku, comme dans /tea/{sku}.
+        // La valeur à cet emplacement dans l'URL (par exemple 123) est attribuée à la variable sku dans la méthode.
+       
+        // L'objet Model est utilisé pour passer des attributs (données) depuis le contrôleur vers la vue (page HTML générée). Il te permet d'ajouter des données à la requête pour qu'elles soient accessibles dans la page Thymeleaf.
+        // Cette ligne ajoute l'objet tea au modèle. Le modèle est un conteneur de données qui sera utilisé dans la vue (page Thymeleaf) pour afficher les informations du produit.
+        // En ajoutant cet attribut, la page Thymeleaf pourra accéder à l'objet tea via ${tea} pour afficher ses informations comme le nom, la description, etc.
+        
+    // Pourquoi les guillemets ? : Les guillemets sont nécessaires ici pour indiquer que "tea" est une chaîne de caractères, et cette chaîne sera le nom de l'attribut sous lequel tu veux enregistrer l'objet tea.
+    // Modèle et Vue : Cet attribut sera ensuite utilisé dans le modèle pour être accessible dans la vue (le fichier Thymeleaf). Par exemple, dans ton fichier HTML, tu pourras accéder à cet objet tea en utilisant la syntaxe ${tea} dans Thymeleaf
+
+
 
 
 
@@ -155,16 +189,3 @@ public class ProductController {
 
 
 }
-       
-    
-
-
-
-    
-
-
-        
-
-
-    
-

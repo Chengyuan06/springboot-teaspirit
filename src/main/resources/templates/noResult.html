@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeaSpirit! Thé biologique</title>
+    <title>TeaSpirit/Tealist</title>
     <link rel="stylesheet" th:href="@{/css/basic.css}" />
     <link rel="stylesheet" th:href="@{/css/header.css}" />
     <link rel="stylesheet" th:href="@{/css/style-index.css}" />
@@ -41,7 +42,6 @@
                                     <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
                                     <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
                                     <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
-                    
                                 </div>
                             </li>
             
@@ -52,17 +52,9 @@
                             </li>
                         </ul>      
                     </div>
-                    <form role="search" th:action="@{/teaspirit/search}" th:method="get">
-                        <!-- role="search" permet aux lecteurs d'écran d'indiquer le formulaire comme étant un formulaire de recherche.
-                        WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) est une spécification écrite par le W3C, 
-                        qui définit un ensemble d'attributs HTML supplémentaires, qui peuvent être appliqués 
-                        aux éléments afin de fournir une sémantique complémentaire et d'améliorer l'accessibilité où elle fait défaut. -->
-    
+                    <form th:action="@{/teaspirit/search}" th:method="get" role="search">
                         <div class="search">
-                            <label for="search"> <input type="search" placeholder="Jasmine" name="query"/></label>
-                            <!-- The name attribute is used to reference elements in a JavaScript, or to reference form data after a form is submitted.
-
-Note: Only form elements with a name attribute will have their values passed when submitting a form. -->
+                            <label for="search"> <input type="text" placeholder="Jasmine" name="query" /></label>
                             <button id="search-button" type="submit">
                                 <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
                             </button>
@@ -100,12 +92,9 @@ Note: Only form elements with a name attribute will have their values passed whe
                 <div class="dropdown">
                     <a th:href="@{/teaspirit/accessory}">Accesoires</a>
                     <div class="dropdown-content">
-
                         <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
                         <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
                         <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
-                    </div>
-
                     </div>
                 </div>
 
@@ -115,53 +104,35 @@ Note: Only form elements with a name attribute will have their values passed whe
 
             </nav>  
         </header>
-        <section class="main-image" th:style="'background-image:url(/images/tealand.png)'">
-                <h3 id="pureté">la pureté de la tradition </h3>
-                <h3 id="force">la force de la nature</h3>
-        </section>
-        <section class="presentation">
-            <div>
-                <img id="rond" th:src="@{/images/rond.jpg}" alt="image de thé">
-            </div>
-            <p id="valeur-pc">TeaSpirit achète en direct des thés de qualité auprès de producteurs sur le terrain, entièrement traçables. Chaque année, on va à la rencontre des producteurs, visite leurs plantations, participe à une partie des récoltes et de la fabrication.
-            Une grande majorité de nos thés sont sourcés et importés directement par notre équipe, sans l'intervention d'aucun autre intermédiaire et en toute indépendance.
-            Notre rôle est de créer des relations directes entre les producteurs et les consommateurs. Du producteur à votre tasse, nous voulons redonner au plus grand nombre le plaisir de savourer de bons thés de qualité.</p>
-            <p id="valeur-mobile">TeaSpirit achète directement des thés de qualité, traçables et sans intermédiaires. Chaque année, nous visitons les producteurs et participons aux récoltes, afin d'offrir aux consommateurs des thés d'exception.
-            </p>
-        
-        </section>
-        <section class="notre-selection">
-            <h3>Notre Sélection</h3>
-            <ul class="exemples">
-                <li class="selection" th:each="selection: ${selections}">
-                    <a th:href="@{/teaspirit/bysku(sku=${selection.sku})}">
-                        <figure>
-                            <img th:src="${selection.image1}" alt="image de thé">
-                            <figcaption>
-                                <h4 th:text="${selection.name}">Notre Sélection</h4>
-                                <h5 th:text="${selection.profil}">Profil aromatique de thé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix" th:text="${selection.price} + '€'">Prix de produit</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <form th:action="@{/cart/add}" method="post">
-                        <input type="hidden" name="sku" th:value="${selection.sku}" />
-                        <div class="add-to-cart">
-                            <label for="quantity"></label>
-                            <input class="quantity" type="number" id="quantity" name="quantity" min="1" value="1" required />
-                            <button  class="add-button" type="submit">Ajouter au Panier</button>
-                        </div>
-                    </form>
-                </li> 
-            </ul>
-        </section>    
+        <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">la pureté de la tradition</div>
+    
+        <div id="error">Aucun produit correspond à votre recherche</div>
+       
+    <section class="notre-selection">
+        <h3>Notre Sélection</h3>
+        <ul class="exemples">
+            <li class="selection" th:each="selection: ${selections}">
+                <a th:href="@{/teaspirit/bysku(sku=${selection.sku})}">
+                <figure>
+                    <img th:src="${selection.image1}" alt="image de thé">
+                    <figcaption>
+                        <h4 th:text="${selection.name}">Notre Sélection</h4>
+                        <h5 th:text="${selection.profil}">Profil aromatique de thé</h5>
+                        <h5>Pochette vrac 100g</h5>
+                        <h5 class="prix" th:text="${selection.price} + '€'">Prix de produit</h5>
+                    </figcaption>
+                </figure>
+                </a>
+                <button class="add">AJOUTER AU PANIER</button>
+            </li> 
+        </ul>
+    </section>   
         <footer>
             <section class="footer-top">
-                 <ul class="footer-icon">
+                <ul class="footer-icon">
                     <li>
                         <figure>
-                            <img th:src="@{/images/livraison.png}"  alt="livraison offerte dès 60€ d'achats">
+                            <img th:src="@{/images/livraison.png}" alt="livraison offerte dès 60€ d'achats">
                             <br>
                             <figcaption>LIVRAISON OFFERTE <br>DÈS 60€ D'ACHATS</figcaption>
 
@@ -185,11 +156,12 @@ Note: Only form elements with a name attribute will have their values passed whe
                         <figure>
                             <img th:src="@{/images/recycle.png}" alt="emballages recyclés">
                             <br>
-                            <figcaption>TOUS NOS EMBALLAGES<br>SONT RECYCLABLES</figcaption>
+                            <figcaption>TOUS NOS EMBALLAGES SONT RECYCLABLES</figcaption>
                         </figure>
                         
                     </li>
                 </ul>
+
             </section>
             <div id="bar"></div>
             <section class="footer-bottom" th:style="'background-image:url(/images/fond-footer2.png)'">
@@ -203,7 +175,8 @@ Note: Only form elements with a name attribute will have their values passed whe
             </section>
 
         </footer>
+
     </main>
-    <script type="text/javascript" th:src="@{/js/index.js}"></script>  
+    
 </body>
 </html>

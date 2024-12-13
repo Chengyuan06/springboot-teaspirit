@@ -1,13 +1,16 @@
 package com.teaspiritspringboot.teaspiritspringboot.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.teaspiritspringboot.teaspiritspringboot.model.Tea;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-@Repository
-public interface TeaRespository extends JpaRepository<Tea,Integer>{
-    Tea findBySku(int sku);
-    Tea findByNameContains(String name);
+public interface TeaRepository extends JpaRepository<Tea, String>{
+  
+    Page<Tea> findByType(String type, Pageable pageable);
+    Tea findBySku(String sku);
+
+
+    
 
 //     Optional<Tea> tea = teaRepository.findById(sku);
 // if (tea.isPresent()) {

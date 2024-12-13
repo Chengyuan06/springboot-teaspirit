@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeaSpirit! Thé biologique</title>
+    <title>TeaSpirit/Tealist</title>
     <link rel="stylesheet" th:href="@{/css/basic.css}" />
     <link rel="stylesheet" th:href="@{/css/header.css}" />
-    <link rel="stylesheet" th:href="@{/css/style-index.css}" />
+    <link rel="stylesheet" th:href="@{/css/tealist.css}" />
     <link rel="stylesheet" th:href="@{/css/footer.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -22,7 +23,7 @@
                         </button>
                         <ul id="list-burger">
                             <li id="menu-item-thé" class="menu-item">
-                                <button class="btn-menu"><a th:href="@{/teaspirit/tea}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
+                                <button class="btn-menu"><a th:href="@{/teaspirit/product}">Thés</a><i id ="fleche-the" class="fa fa-caret-down"></i> </button>
                                 <div id="item-content-thé" class="item-content">
                                     <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
                                     <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
@@ -41,7 +42,6 @@
                                     <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
                                     <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
                                     <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
-                    
                                 </div>
                             </li>
             
@@ -52,17 +52,9 @@
                             </li>
                         </ul>      
                     </div>
-                    <form role="search" th:action="@{/teaspirit/search}" th:method="get">
-                        <!-- role="search" permet aux lecteurs d'écran d'indiquer le formulaire comme étant un formulaire de recherche.
-                        WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) est une spécification écrite par le W3C, 
-                        qui définit un ensemble d'attributs HTML supplémentaires, qui peuvent être appliqués 
-                        aux éléments afin de fournir une sémantique complémentaire et d'améliorer l'accessibilité où elle fait défaut. -->
-    
+                    <form th:action="@{/teaspirit/search}" th:method="get" role="search">
                         <div class="search">
-                            <label for="search"> <input type="search" placeholder="Jasmine" name="query"/></label>
-                            <!-- The name attribute is used to reference elements in a JavaScript, or to reference form data after a form is submitted.
-
-Note: Only form elements with a name attribute will have their values passed when submitting a form. -->
+                            <label for="search"> <input type="text" placeholder="Jasmine" name="query" /></label>
                             <button id="search-button" type="submit">
                                 <img th:src="@{/images/icons8-chercher-64.png}" alt="search image">
                             </button>
@@ -82,7 +74,7 @@ Note: Only form elements with a name attribute will have their values passed whe
             </section>
             <nav class="menu">
                 <div class="dropdown">
-                    <a th:href="@{/teaspirit/tea}">Thés</a>
+                    <a th:href="@{/teaspirit/product}">Thés</a>
                     <div class="dropdown-content">
                         <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
                         <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
@@ -100,12 +92,9 @@ Note: Only form elements with a name attribute will have their values passed whe
                 <div class="dropdown">
                     <a th:href="@{/teaspirit/accessory}">Accesoires</a>
                     <div class="dropdown-content">
-
                         <a th:href="@{/teaspirit/accessory/filter(category='theiere')}">Théières</a>
                         <a th:href="@{/teaspirit/accessory/filter(category='tasse')}">Tasses</a>
                         <a th:href="@{/teaspirit/accessory/filter(category='ustensiles')}">Ustensiles</a>
-                    </div>
-
                     </div>
                 </div>
 
@@ -115,53 +104,62 @@ Note: Only form elements with a name attribute will have their values passed whe
 
             </nav>  
         </header>
-        <section class="main-image" th:style="'background-image:url(/images/tealand.png)'">
-                <h3 id="pureté">la pureté de la tradition </h3>
-                <h3 id="force">la force de la nature</h3>
-        </section>
-        <section class="presentation">
-            <div>
-                <img id="rond" th:src="@{/images/rond.jpg}" alt="image de thé">
-            </div>
-            <p id="valeur-pc">TeaSpirit achète en direct des thés de qualité auprès de producteurs sur le terrain, entièrement traçables. Chaque année, on va à la rencontre des producteurs, visite leurs plantations, participe à une partie des récoltes et de la fabrication.
-            Une grande majorité de nos thés sont sourcés et importés directement par notre équipe, sans l'intervention d'aucun autre intermédiaire et en toute indépendance.
-            Notre rôle est de créer des relations directes entre les producteurs et les consommateurs. Du producteur à votre tasse, nous voulons redonner au plus grand nombre le plaisir de savourer de bons thés de qualité.</p>
-            <p id="valeur-mobile">TeaSpirit achète directement des thés de qualité, traçables et sans intermédiaires. Chaque année, nous visitons les producteurs et participons aux récoltes, afin d'offrir aux consommateurs des thés d'exception.
-            </p>
-        
-        </section>
-        <section class="notre-selection">
-            <h3>Notre Sélection</h3>
-            <ul class="exemples">
-                <li class="selection" th:each="selection: ${selections}">
-                    <a th:href="@{/teaspirit/bysku(sku=${selection.sku})}">
+        <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">la pureté de la tradition</div>
+    
+        <div th:if="${!products.empty}">
+            <section id = "tealist">
+                <div class="product" th:each="product: ${products.content}">
+                    <!-- th:each : est une boucle de foreach; pour product: est l'objet récupéré de la liste products
+                    products fait référence de l'objet Page<products>, cet objet a plusiuers propriétés utiles pour la pagination, comme content, number, totalPages, etc.
+                    products.content: cette propriété représente la liste de tous les éléments (ici, chaque product) de la page actuelle -->
+                    <!-- chaque fois que Thymeleaf rencontre cette directive, il va générer un <div> pour 
+                    chaque produit de thé contenu dans products.content, en utilisant la variable product pour insérer les valeurs spécifiques à ce produit dans le HTML. -->
+                    <a th:href="@{/teaspirit/bysku(sku=${product.sku})}">
                         <figure>
-                            <img th:src="${selection.image1}" alt="image de thé">
+                            <img class="product-image" th:src="${product.image1}" alt="image de produit">
                             <figcaption>
-                                <h4 th:text="${selection.name}">Notre Sélection</h4>
-                                <h5 th:text="${selection.profil}">Profil aromatique de thé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix" th:text="${selection.price} + '€'">Prix de produit</h5>
+                                <h4 th:text="${product.name}">Product Name</h4>
+                                <h5 class="prix" th:text="${product.price} + '€'"> Product Price</h5>
                             </figcaption>
-                        </figure>
+                        </figure> 
                     </a>
                     <form th:action="@{/cart/add}" method="post">
-                        <input type="hidden" name="sku" th:value="${selection.sku}" />
+                        <input type="hidden" name="sku" th:value="${product.sku}" />
                         <div class="add-to-cart">
                             <label for="quantity"></label>
                             <input class="quantity" type="number" id="quantity" name="quantity" min="1" value="1" required />
                             <button  class="add-button" type="submit">Ajouter au Panier</button>
                         </div>
                     </form>
-                </li> 
-            </ul>
-        </section>    
+                </div>
+                
+            </section>
+
+          
+            <div id="error" th:if="${products.empty}">Aucun produit correspond à votre recherche</div>
+        </div>
+        <div class="pagination">
+            <span th:text="'Page ' + ${products.number + 1} + ' sur ' + ${products.totalPages}"></span>
+            <div>
+                <a th:if="${products.hasPrevious()}" th:href="@{/search(query=${query},page=${products.number - 1})}">&laquo;</a>
+             <!-- products.number est une propriété directement accessible de l'objet Page en Spring Data JPA. Le number représente la page actuelle, 
+              d'où sa simplicité d'accès sans méthode intermédiaire. Et c'est pourquoi tu vois products.number plutôt que products.getNumber().-->
+             <!-- ${} est une variable de Thymeleaf -->
+                <a th:if="${products.hasNext()}" th:href="@{/search(query=${query},page=${products.number + 1})}">&raquo;</a>
+                <!-- Thymeleaf syntax : Utilise des parenthèses () pour séparer les paramètres, comme (type=${type},page=${products.number - 1}).
+                 dans URL les paramètres sont séparés par virgule et rangés dans une (), sauf que la virgule est 
+                 devenue automtiquement & dans URL -->
+            </div>
+        </div>
+
+        <!-- products.number donne le numéro de page actuel, une méthode de Thymeleaf -->
+        
         <footer>
             <section class="footer-top">
-                 <ul class="footer-icon">
+                <ul class="footer-icon">
                     <li>
                         <figure>
-                            <img th:src="@{/images/livraison.png}"  alt="livraison offerte dès 60€ d'achats">
+                            <img th:src="@{/images/livraison.png}" alt="livraison offerte dès 60€ d'achats">
                             <br>
                             <figcaption>LIVRAISON OFFERTE <br>DÈS 60€ D'ACHATS</figcaption>
 
@@ -185,11 +183,12 @@ Note: Only form elements with a name attribute will have their values passed whe
                         <figure>
                             <img th:src="@{/images/recycle.png}" alt="emballages recyclés">
                             <br>
-                            <figcaption>TOUS NOS EMBALLAGES<br>SONT RECYCLABLES</figcaption>
+                            <figcaption>TOUS NOS EMBALLAGES SONT RECYCLABLES</figcaption>
                         </figure>
                         
                     </li>
                 </ul>
+
             </section>
             <div id="bar"></div>
             <section class="footer-bottom" th:style="'background-image:url(/images/fond-footer2.png)'">
@@ -203,7 +202,8 @@ Note: Only form elements with a name attribute will have their values passed whe
             </section>
 
         </footer>
+
     </main>
-    <script type="text/javascript" th:src="@{/js/index.js}"></script>  
+    
 </body>
 </html>

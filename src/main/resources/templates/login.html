@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/basic.css}" />
     <link rel="stylesheet" th:href="@{/css/header.css}" />
     <link rel="stylesheet" th:href="@{/css/style-index.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
     <link rel="stylesheet" th:href="@{/css/footer.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -85,7 +86,6 @@ Note: Only form elements with a name attribute will have their values passed whe
                     <a th:href="@{/teaspirit/tea}">Thés</a>
                     <div class="dropdown-content">
                         <a th:href="@{/teaspirit/tea/bytype(type='thé blanc')}">Thé Blanc</a>
-                        <!-- Cette ligne de code génère automatiquement l'URL products/tea/filter?type=thé%20blanc lorsque je clique sur le lien. -->
                         <a th:href="@{/teaspirit/tea/bytype(type='thé vert')}">Thé Vert</a>
                         <a th:href="@{/teaspirit/tea/bytype(type='thé jaune')}">Thé Jaune</a>
                         <a th:href="@{/teaspirit/tea/bytype(type='thé noir')}">Thé Noir</a>
@@ -115,47 +115,58 @@ Note: Only form elements with a name attribute will have their values passed whe
 
             </nav>  
         </header>
-        <section class="main-image" th:style="'background-image:url(/images/tealand.png)'">
-                <h3 id="pureté">la pureté de la tradition </h3>
-                <h3 id="force">la force de la nature</h3>
-        </section>
-        <section class="presentation">
-            <div>
-                <img id="rond" th:src="@{/images/rond.jpg}" alt="image de thé">
-            </div>
-            <p id="valeur-pc">TeaSpirit achète en direct des thés de qualité auprès de producteurs sur le terrain, entièrement traçables. Chaque année, on va à la rencontre des producteurs, visite leurs plantations, participe à une partie des récoltes et de la fabrication.
-            Une grande majorité de nos thés sont sourcés et importés directement par notre équipe, sans l'intervention d'aucun autre intermédiaire et en toute indépendance.
-            Notre rôle est de créer des relations directes entre les producteurs et les consommateurs. Du producteur à votre tasse, nous voulons redonner au plus grand nombre le plaisir de savourer de bons thés de qualité.</p>
-            <p id="valeur-mobile">TeaSpirit achète directement des thés de qualité, traçables et sans intermédiaires. Chaque année, nous visitons les producteurs et participons aux récoltes, afin d'offrir aux consommateurs des thés d'exception.
-            </p>
-        
-        </section>
-        <section class="notre-selection">
-            <h3>Notre Sélection</h3>
-            <ul class="exemples">
-                <li class="selection" th:each="selection: ${selections}">
-                    <a th:href="@{/teaspirit/bysku(sku=${selection.sku})}">
-                        <figure>
-                            <img th:src="${selection.image1}" alt="image de thé">
-                            <figcaption>
-                                <h4 th:text="${selection.name}">Notre Sélection</h4>
-                                <h5 th:text="${selection.profil}">Profil aromatique de thé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix" th:text="${selection.price} + '€'">Prix de produit</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <form th:action="@{/cart/add}" method="post">
-                        <input type="hidden" name="sku" th:value="${selection.sku}" />
-                        <div class="add-to-cart">
-                            <label for="quantity"></label>
-                            <input class="quantity" type="number" id="quantity" name="quantity" min="1" value="1" required />
-                            <button  class="add-button" type="submit">Ajouter au Panier</button>
+
+        <div class="error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <section class="user">
+          
+            <div class="login">
+                <form action="/teaspirit/user/account" method="POST">
+                    <h2>Se connecter</h2>
+                    <div class="form-item">
+                        <label for="identifiant-login">Identifiant ou e-mail*</label>
+                        <br>
+                        <input type="text" id="identifiant-login" name="identifier" required >
+                    </div>
+                    <div class="form-item">
+                        <label for="password-login">Mot de passe*</label>
+                        <br>
+                        <input type="password" id="password-login" name="password" required>
+                        <div class="show-password">
+                            <label for="show-login">Show Password</label>
+                            <input id="show-login" type="checkbox">
                         </div>
-                    </form>
-                </li> 
-            </ul>
-        </section>    
+
+                    </div>
+                    <button type="submit">Se connecter</button>
+                </form>
+            </div>
+            <div class="register">
+                <form action="/teaspirit/user/signup" method="post">
+                    <h2>S'enregistrer</h2>
+                    <div class="form-item">
+                        <label for="identifiant-register">E-mail*</label>
+                        <br>
+                        <input type="email" id="identifiant" name="email" required>
+                    </div>
+
+                    <div class="form-item">
+                        <label for="password">Mot de passe*</label>
+                        <br>
+                        <input type="password" id="password-register" name="password" required><image></image>
+                        <div class="show-password">
+                            <label for="show-register">Show Password</label>
+                            <input id="show-register" type="checkbox">
+                        </div>
+                        
+                    </div>
+                    <button type="submit">S'enregistrer</button>
+                </form> 
+            </div>
+
+        </section>
+    
+       
         <footer>
             <section class="footer-top">
                  <ul class="footer-icon">
@@ -204,6 +215,6 @@ Note: Only form elements with a name attribute will have their values passed whe
 
         </footer>
     </main>
-    <script type="text/javascript" th:src="@{/js/index.js}"></script>  
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>  
 </body>
 </html>

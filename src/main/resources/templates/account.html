@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/basic.css}" />
     <link rel="stylesheet" th:href="@{/css/header.css}" />
     <link rel="stylesheet" th:href="@{/css/style-index.css}" />
+    <link rel="stylesheet" th:href="@{/css/account.css}" />
     <link rel="stylesheet" th:href="@{/css/footer.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -72,7 +73,7 @@ Note: Only form elements with a name attribute will have their values passed whe
                 
                 <div class="user-cart">
                     <button id="user">
-                        <a th:href="@{/teaspirit/user/login}"><img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image"></a>
+                        <a th:href="@{/teaspirit/user/account}"><img th:src="@{/images/icons8-utilisateur-64.png}" alt="user image"></a>
                     </button>
                     <button id="cart">
                         <img th:src="@{/images/cart-64.png}" alt="cart image">
@@ -115,47 +116,28 @@ Note: Only form elements with a name attribute will have their values passed whe
 
             </nav>  
         </header>
-        <section class="main-image" th:style="'background-image:url(/images/tealand.png)'">
-                <h3 id="pureté">la pureté de la tradition </h3>
-                <h3 id="force">la force de la nature</h3>
-        </section>
-        <section class="presentation">
-            <div>
-                <img id="rond" th:src="@{/images/rond.jpg}" alt="image de thé">
-            </div>
-            <p id="valeur-pc">TeaSpirit achète en direct des thés de qualité auprès de producteurs sur le terrain, entièrement traçables. Chaque année, on va à la rencontre des producteurs, visite leurs plantations, participe à une partie des récoltes et de la fabrication.
-            Une grande majorité de nos thés sont sourcés et importés directement par notre équipe, sans l'intervention d'aucun autre intermédiaire et en toute indépendance.
-            Notre rôle est de créer des relations directes entre les producteurs et les consommateurs. Du producteur à votre tasse, nous voulons redonner au plus grand nombre le plaisir de savourer de bons thés de qualité.</p>
-            <p id="valeur-mobile">TeaSpirit achète directement des thés de qualité, traçables et sans intermédiaires. Chaque année, nous visitons les producteurs et participons aux récoltes, afin d'offrir aux consommateurs des thés d'exception.
-            </p>
-        
-        </section>
-        <section class="notre-selection">
-            <h3>Notre Sélection</h3>
-            <ul class="exemples">
-                <li class="selection" th:each="selection: ${selections}">
-                    <a th:href="@{/teaspirit/bysku(sku=${selection.sku})}">
-                        <figure>
-                            <img th:src="${selection.image1}" alt="image de thé">
-                            <figcaption>
-                                <h4 th:text="${selection.name}">Notre Sélection</h4>
-                                <h5 th:text="${selection.profil}">Profil aromatique de thé</h5>
-                                <h5>Pochette vrac 100g</h5>
-                                <h5 class="prix" th:text="${selection.price} + '€'">Prix de produit</h5>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <form th:action="@{/cart/add}" method="post">
-                        <input type="hidden" name="sku" th:value="${selection.sku}" />
-                        <div class="add-to-cart">
-                            <label for="quantity"></label>
-                            <input class="quantity" type="number" id="quantity" name="quantity" min="1" value="1" required />
-                            <button  class="add-button" type="submit">Ajouter au Panier</button>
-                        </div>
-                    </form>
-                </li> 
+        <div id="main-image" th:style="'background-image:url(/images/main-image.jpg)'">la pureté de la tradition</div>
+
+
+        <section class="user-information">
+           <div class="user-menu">
+            <ul>
+                <li><a th:href="@{/teaspirit/user/profil}">Compte information</a></li>
+                <li><a href="#">Commandes</a></li>
+                <li><a href="#">Adresses</a></li>
+                <li><a href="#">Moyens de paiement</a></li>
+                <li><a th:href="@{/teaspirit/user/logout}">Se déconnecter</a></li>
             </ul>
-        </section>    
+           </div>
+           <div class="menu-details">
+            <h3 th:if="${user.username}" th:text="'Bonjour ' + ${user.username} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
+            <h3 th:unless="${user.username}" th:text="'Bonjour ' + ${user.email} + ', bienvenu dans notre boutique TeaSpirit!'">Bienvenu</h3>
+            
+            <p>À partir du menu de votre compte, vous pouvez visualiser vos commandes récentes, gérer vos adresses de livraison et de facturation ainsi que changer votre mot de passe et les détails de votre compte.</p>
+           </div>
+        </section>
+    
+       
         <footer>
             <section class="footer-top">
                  <ul class="footer-icon">

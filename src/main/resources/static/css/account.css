@@ -1,0 +1,45 @@
+.user-information {
+    display: flex;
+    justify-content: space-around;
+    margin: 3%;
+    
+}
+
+.user-menu{
+    min-width: 30%;
+    max-width: 30%;
+    padding-right: 30px;
+    display: flex;
+    justify-content: end;
+    height: fit-content;
+}
+
+.user-menu ul {
+    display: block;
+    width: 25vw;
+    max-width: 200px;
+    border: 1px solid #ccc;
+}
+
+  
+.user-menu ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+  
+.user-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.user-menu ul li a {
+    display: block;
+}
+.user-menu ul li a:hover {
+    text-decoration: none;
+    color:#35632F; 
+    font-weight: bold;
+
+}
+  
+h3 {margin: 3% 0}
+

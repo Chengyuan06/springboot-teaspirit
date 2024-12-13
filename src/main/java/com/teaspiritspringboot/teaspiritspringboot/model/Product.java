@@ -1,36 +1,35 @@
 package com.teaspiritspringboot.teaspiritspringboot.model;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.teaspiritspringboot.teaspiritspringboot.repository.ProductRepository;
-
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.PreparedStatement;
-// import java.sql.ResultSet;
-// import java.sql.SQLException;
-// import java.sql.Statement;
-// import java.util.ArrayList;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table; 
-
-import java.util.List;
-
-
 @Entity //@Entity 注解：标记该类为一个 JPA 实体，表明它对应于数据库中的一个表。
 @Inheritance(strategy = InheritanceType.JOINED) 
 // inheritance strategy means each class in the hierarchy will have its table, and they will be joined using foreign keys
 @Table( name = "product") // @Table(name = "product") 注解：指定了这个实体类映射的数据库表的名称是 product。
 public class Product {
     @Id
-    private int sku; // @Id est juste l'atonnation pour l'attribut sku. Pour indiquer sku est la clé primaire dans BDD
+    @Column (name = "sku", nullable = false)
+    private String sku; // @Id est juste l'atonnation pour l'attribut sku. Pour indiquer sku est la clé primaire dans BDD
+    
+    @Column (name = "name", nullable = false)
     private String name;
+
+    @Column (name = "price", nullable = false)
     private double price;
+
+    @Column (name = "quantity", nullable = false)
     private int quantity;
-    private String image;
+
+    @Column (name = "image1", nullable = false)
+    private String image1;
+
+    @Column (name = "image2", nullable = false)
+    private String image2;
+
+    @Column (name = "is_deleted", nullable = false)
     private boolean is_deleted;
 
     /* Si la clé primaire est auto-incrément, il faut ajouter @ GenerateValue juste après @Id
@@ -38,20 +37,14 @@ public class Product {
      * ID 字段通常是一个表的主键。@GeneratedValue 注解用于指定主键生成策略，这里使用了 IDENTITY 策略，表示数据库自动生成主键值。
      */
 
-    @Autowired static ProductRepository productRespository;
-
-    // public static List<Product> getAllDeleted(){
-    //     return productRespository.getAllDeleted();
-    // }
-
-
     //constructeurs:
-    public Product(int sku, String name, double price, int quantity, String image){
+    public Product(String sku, String name, double price, int quantity, String image1, String image2){
         this.sku = sku;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.image = image;
+        this.image1 = image1;
+        this.image2 = image2;
         this.is_deleted = false;
 
     }
@@ -63,15 +56,15 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product [sku=" + sku + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", image="
-                + image + ", is_deleted=" + is_deleted + "]";
+        return "Product [sku=" + sku + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", image1="
+                + image1 + ", image2 ="+ image2 + ", is_deleted=" + is_deleted + "]";
     }
 
-    public int getSku() {
+    public String getSku() {
         return sku;
     }
 
-    public void setSku(int sku) {
+    public void setSku(String sku) {
         this.sku = sku;
     }
 
@@ -99,12 +92,20 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getImage() {
-        return image;
+    public String getImage1() {
+        return image1;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getImage2(){
+        return image2;
+    }
+
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
     }
 
     public boolean isIsDeleted() {

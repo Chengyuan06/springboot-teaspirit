@@ -1,0 +1,149 @@
+
+#main-image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: block;
+    height: 25vh;
+    font-size: 1.75rem;
+    padding: 5vw;
+    text-align: center;
+    color: white;
+
+  
+}
+
+.filter-bar{
+    margin: 2vw;;
+    background-color: #CDC4A9;
+    text-align: center;
+}
+#tealist{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#error {
+    font-size: 1.5rem ;
+    text-align: center;
+    margin: 1.25rem;
+}
+
+
+.product{
+   height: 27rem;
+   width: 20%;
+   margin: 2vw;
+   display: flex;
+   flex-direction:column ;
+   justify-content: space-between; 
+   /* le contenu de div rempli l'espace, ca permet aligner les images et les legendes, certains produits ont 2 lignes de nom */
+   align-items: center;
+
+}
+.product-image{
+    max-width: 100%;
+    height: auto;
+}
+
+.product{
+    transition: transform 0.3s;
+}
+
+.product:hover{
+    text-decoration: none;
+    transform: scale(1.1);
+}
+
+/* transition: de définir la transition entre deux états d'un élément; 
+ici c'est le div entier .product va changer avant et pendant survoler
+donc, on le met dans .product; ensuite, sur quoi il va changer?  
+transition st une propriété raccourcie pour les propriétés :
+transition-property, transition-duration, transition-timing-function et transition-delay
+ici dans mon cas: 
+transition-property : transform
+transition-duration:03.s
+transition-timing-function: ease (par défaut) et transition-delay : 0 (par défaut)
+*/
+
+/*transform permet de changer un élément en visuel (comme grandir (scale), tourner(rotate) : scale (echelle en fr)*/
+
+.product a:hover{ text-decoration: none;}
+figure{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+}
+figcaption{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+figcaption h4{
+    font-size: 1.25rem;
+}
+figcaption h5{
+   font-weight: normal;
+   margin-top: 5px;
+}
+
+.prix{
+    font-weight: bold;
+}
+
+.add{
+    background-color: #CDC4A9;
+    border: none;
+    width:14.375rem;
+    height: 2.5rem;
+    margin: 10px
+}
+
+
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le champ et le bouton */
+}
+.quantity {
+    width: 50px; /* Largeur de l'input */
+    text-align: center;
+    font-size: 16px;
+    border: 2px solid;
+    border-radius: 5px;
+    color: #CDC4A9;
+    padding: 5px;
+}
+
+.add-button {
+    background-color: #CDC4A9; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.add-button:hover {
+    background-color: #45a049; /* Couleur au survol */
+}
+
+.quantity:focus {
+    outline: none;
+    border-color: #45a049; /* Couleur de la bordure lorsque l'input est actif */
+}
+
+
+
+
+.pagination{
+    display: flex;
+    justify-content: center;
+}
